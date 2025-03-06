@@ -1,3 +1,3 @@
-# Intersmash Deployments
+# Intersmash Applications
 
-Application services deployments to be used in Intersmash tests.
+Applications to be used in Intersmash tests.

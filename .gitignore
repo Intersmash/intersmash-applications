@@ -1,1 +1,5 @@
+/.idea/
+/target/
+/wildfly/target/
 /wildfly/microprofile-reactive-messaging-kafka/target/
+/application-provider/target/

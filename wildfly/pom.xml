@@ -3,15 +3,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.jboss.intersmash</groupId>
-        <artifactId>intersmash-deployments</artifactId>
+        <groupId>org.jboss.intersmash.applications</groupId>
+        <artifactId>intersmash-applications</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>intersmash-deployments-wildfly</artifactId>
+    <artifactId>intersmash-applications-wildfly</artifactId>
     <packaging>pom</packaging>
-    <name>Intersmash Deployments :: WildFly aggregator</name>
+    <name>Intersmash Applications :: WildFly aggregator</name>
 
     <properties>
         <version.maven-war-plugin>3.4.0</version.maven-war-plugin>
@@ -29,7 +29,7 @@
         <!-- Default WildFly `microprofile` BOM version is set here and can be overridden for pulling the right BOM -->
         <bom.wildfly-microprofile.groupId>org.wildfly.bom</bom.wildfly-microprofile.groupId>
         <bom.wildfly-microprofile.artifactId>wildfly-expansion</bom.wildfly-microprofile.artifactId>
-        <bom.wildfly-microprofile.version>${version.wildfly-server}</bom.wildfly-microprofile.version>
+        <bom.wildfly-microprofile.version>${wildfly.version}</bom.wildfly-microprofile.version>
         <!-- Default WildFly/EAP 8.z Feature Pack coordinates -->
         <wildfly.feature-pack.location>org.wildfly:wildfly-galleon-pack:${wildfly.version}</wildfly.feature-pack.location>
         <!-- Default WildFly/EAP 8.z Feature Pack coordinates -->
@@ -60,7 +60,7 @@
                         <warName>ROOT</warName>
                     </configuration>
                 </plugin>
-                <!-- WildFly/EAP 8.z deployments use the WildFly Maven plugin to package -->
+                <!-- WildFly/EAP 8.z applications use the WildFly Maven plugin to package -->
                 <plugin>
                     <groupId>${wildfly-maven-plugin.groupId}</groupId>
                     <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
@@ -109,23 +109,61 @@
 
     <profiles>
         <profile>
-            <id>eap-xp6</id>
+            <id>build-distribution.eap</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>${wildfly-maven-plugin.groupId}</groupId>
+                            <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
+                            <version>${wildfly-maven-plugin.version}</version>
+                            <configuration>
+                                <filename>ROOT.war</filename>
+                                <!-- JBoss EAP 8.x applications require the EE Galleon Feature Pack -->
+                                <feature-packs>
+                                    <feature-pack>
+                                        <location>${wildfly.ee-feature-pack.location}</location>
+                                    </feature-pack>
+                                    <feature-pack>
+                                        <location>${wildfly.cloud-feature-pack.location}</location>
+                                    </feature-pack>
+                                </feature-packs>
+                                <channels>
+                                    <channel>
+                                        <manifest>
+                                            <groupId>${wildfly.ee-channel.groupId}</groupId>
+                                            <artifactId>${wildfly.ee-channel.artifactId}</artifactId>
+                                            <version>${wildfly.ee-channel.version}</version>
+                                        </manifest>
+                                    </channel>
+                                </channels>
+                                <layers>
+                                    <layer>cloud-default-config</layer>
+                                </layers>
+                                <!--
+                                    Both the Bootable JAR and Maven plugin are executed on some cases and their executions
+                                    might collide. Let's isolate the WildFly/EAP Maven plugin execution to be safe
+                                -->
+                                <galleon-options>
+                                    <jboss-fork-embedded>true</jboss-fork-embedded>
+                                </galleon-options>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>package</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
+        <profile>
+            <id>build-distribution.eapxp</id>
             <properties>
-                <!-- WildFly/EAP 8.z Maven Plugin coordinates -->
-                <wildfly-maven-plugin.groupId>org.jboss.eap.plugins</wildfly-maven-plugin.groupId>
-                <wildfly-maven-plugin.artifactId>eap-maven-plugin</wildfly-maven-plugin.artifactId>
-                <wildfly-maven-plugin.version>1.0.0.Final-redhat-00014</wildfly-maven-plugin.version>
-                <!-- Default EAP XP 6 `microprofile` BOM version is set here and can be overridden for pulling the right BOM -->
-                <bom.wildfly-microprofile.groupId>org.jboss.bom</bom.wildfly-microprofile.groupId>
-                <bom.wildfly-microprofile.artifactId>jboss-eap-xp-microprofile</bom.wildfly-microprofile.artifactId>
-                <bom.wildfly-microprofile.version>5.0.0.GA-redhat-00009</bom.wildfly-microprofile.version>
-                <!-- FPLs -->
-                <wildfly.feature-pack.location>org.jboss.eap.xp:wildfly-galleon-pack:5.0.0.GA-redhat-00005</wildfly.feature-pack.location>
-                <wildfly.cloud-feature-pack.location>org.jboss.eap.cloud:eap-cloud-galleon-pack:1.0.0.Final-redhat-00008</wildfly.cloud-feature-pack.location>
-                <!-- EAP 8.z Channel coordinates -->
-                <wildfly.ee-channel.groupId>org.jboss.eap.channels</wildfly.ee-channel.groupId>
-                <wildfly.ee-channel.artifactId>eap-8.0</wildfly.ee-channel.artifactId>
-                <wildfly.ee-channel.version>1.0.1.GA-redhat-00003</wildfly.ee-channel.version>
                 <!-- EAP XP z Channel coordinates -->
                 <wildfly.xp-channel.groupId>org.jboss.eap.channels</wildfly.xp-channel.groupId>
                 <wildfly.xp-channel.artifactId>eap-xp-5.0</wildfly.xp-channel.artifactId>
@@ -134,7 +172,6 @@
             <build>
                 <pluginManagement>
                     <plugins>
-                        <!-- WildFly/EAP 8.z deployments use the WildFly Maven plugin to package -->
                         <plugin>
                             <groupId>${wildfly-maven-plugin.groupId}</groupId>
                             <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
@@ -188,6 +225,25 @@
                 </pluginManagement>
             </build>
         </profile>
+        <profile>
+            <id>build-stream.eapxp6</id>
+            <properties>
+                <!-- WildFly/EAP 8.z Maven Plugin coordinates -->
+                <wildfly-maven-plugin.groupId>org.jboss.eap.plugins</wildfly-maven-plugin.groupId>
+                <wildfly-maven-plugin.artifactId>eap-maven-plugin</wildfly-maven-plugin.artifactId>
+                <wildfly-maven-plugin.version>1.0.0.Final-redhat-00014</wildfly-maven-plugin.version>
+                <!-- Default EAP XP 6 `microprofile` BOM version is set here and can be overridden for pulling the right BOM -->
+                <bom.wildfly-microprofile.groupId>org.jboss.bom</bom.wildfly-microprofile.groupId>
+                <bom.wildfly-microprofile.artifactId>jboss-eap-xp-microprofile</bom.wildfly-microprofile.artifactId>
+                <bom.wildfly-microprofile.version>5.0.0.GA-redhat-00009</bom.wildfly-microprofile.version>
+                <!-- FPLs -->
+                <wildfly.feature-pack.location>org.jboss.eap.xp:wildfly-galleon-pack:5.0.0.GA-redhat-00005</wildfly.feature-pack.location>
+                <wildfly.cloud-feature-pack.location>org.jboss.eap.cloud:eap-cloud-galleon-pack:1.0.0.Final-redhat-00008</wildfly.cloud-feature-pack.location>
+                <!-- EAP 8.z Channel coordinates -->
+                <wildfly.ee-channel.groupId>org.jboss.eap.channels</wildfly.ee-channel.groupId>
+                <wildfly.ee-channel.artifactId>eap-8.0</wildfly.ee-channel.artifactId>
+                <wildfly.ee-channel.version>1.0.1.GA-redhat-00003</wildfly.ee-channel.version>
+            </properties>
+        </profile>
     </profiles>
-
 </project>
