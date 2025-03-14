@@ -16,13 +16,13 @@
 package org.jboss.intersmash.deployments.wildfly;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jboss.intersmash.deployments.DeploymentProperties;
 
 /**
  * Defines the contract for WILDFLY application services that expose
- * configuration which should be taken into account by the WILDFLY s2i v2
- * process, i.e. the WildFly Maven plugin, feature packs and BOMs settings
+ * configuration which should be taken into account by s2i builds
  */
-public interface WildflyDeploymentApplicationConfiguration {
+public interface WildflyApplicationConfiguration {
 
 	String WILDFLY_EE_FEATURE_PACK_LOCATION = "wildfly.ee-feature-pack.location";
 	String WILDFLY_FEATURE_PACK_LOCATION = "wildfly.feature-pack.location";
@@ -229,51 +229,66 @@ public interface WildflyDeploymentApplicationConfiguration {
 		return WILDFLY_MAVEN_PLUGIN_VERSION;
 	}
 
+	/**
+	 *  Build a string that will be used to set the {@code MAVEN_ARGS_APPEND} environment variable
+	 * 	of a s2i build configuration. This way all relevant system properties and profiles which should be
+	 * 	used to build a WildFly/JBoss EAP 8.x or JBoss EAP XP application conveniently, i.e. with the expected bits and
+	 * 	configuration, can be forwarded to a remote s2i build.
+	 * @return A string that will be set as the value for the {@code MAVEN_ARGS_APPEND} environment variable
+	 * of a s2i build configuration.
+	 */
 	default String generateAdditionalMavenArgs() {
-		String result = "".concat(((!StringUtils.isBlank(this.eeFeaturePackLocation())
+		String result = "".concat(((StringUtils.isBlank(this.eeFeaturePackLocation())
 				? ""
 				: (" -D" + this.eeFeaturePackLocationPropertyName() + "=" + this.eeFeaturePackLocation())))
-				+ ((!StringUtils.isBlank(this.featurePackLocation())
+				+ ((StringUtils.isBlank(this.featurePackLocation())
 						? ""
 						: (" -D" + this.featurePackLocationPropertyName() + "=" + this.featurePackLocation())))
-				+ ((!StringUtils.isBlank(this.cloudFeaturePackLocation())
+				+ ((StringUtils.isBlank(this.cloudFeaturePackLocation())
 						? ""
 						: (" -D" + this.cloudFeaturePackLocationPropertyName() + "="
 								+ this.cloudFeaturePackLocation())))
-				+ ((!StringUtils.isBlank(this.datasourcesFeaturePackLocation())
+				+ ((StringUtils.isBlank(this.datasourcesFeaturePackLocation())
 						? ""
 						: (" -D" + this.datasourcesFeaturePackLocationPropertyName() + "="
 								+ this.datasourcesFeaturePackLocation())))
-				+ ((!StringUtils.isBlank(this.keycloakSamlAdapterFeaturePackVersion())
+				+ ((StringUtils.isBlank(this.keycloakSamlAdapterFeaturePackVersion())
 						? ""
 						: (" -D" + this.keycloakSamlAdapterFeaturePackVersionPropertyName() + "="
 								+ this.keycloakSamlAdapterFeaturePackVersion())))
-				+ ((!StringUtils.isBlank(this.eeChannelGroupId())
+				+ ((StringUtils.isBlank(this.eeChannelGroupId())
 						? ""
 						: (" -D" + this.eeChannelGroupIdPropertyName() + "=" + this.eeChannelGroupId())))
-				+ ((!StringUtils.isBlank(this.eeChannelArtifactId())
+				+ ((StringUtils.isBlank(this.eeChannelArtifactId())
 						? ""
 						: (" -D" + this.eeChannelArtifactIdPropertyName() + "=" + this.eeChannelArtifactId())))
-				+ ((!StringUtils.isBlank(this.eeChannelVersion())
+				+ ((StringUtils.isBlank(this.eeChannelVersion())
 						? ""
 						: (" -D" + this.eeChannelVersionPropertyName() + "=" + this.eeChannelVersion())))
-				+ ((!StringUtils.isBlank(this.wildflyMavenPluginGroupId())
+				+ ((StringUtils.isBlank(this.wildflyMavenPluginGroupId())
 						? ""
 						: (" -D" + this.wildflyMavenPluginGroupIdPropertyName() + "="
 								+ this.wildflyMavenPluginGroupId())))
-				+ ((!StringUtils.isBlank(this.wildflyMavenPluginArtifactId())
+				+ ((StringUtils.isBlank(this.wildflyMavenPluginArtifactId())
 						? ""
 						: (" -D" + this.wildflyMavenPluginArtifactIdPropertyName() + "="
 								+ this.wildflyMavenPluginArtifactId())))
-				+ ((!StringUtils.isBlank(this.wildflyMavenPluginVersion())
+				+ ((StringUtils.isBlank(this.wildflyMavenPluginVersion())
 						? ""
 						: (" -D" + this.wildflyMavenPluginVersionPropertyName() + "="
 								+ this.wildflyMavenPluginVersion())))
-				+ ((!StringUtils.isBlank(this.bomsEeServerVersion())
+				+ ((StringUtils.isBlank(this.bomsEeServerVersion())
 						? ""
 						: (" -D" + this.bomsEeServerVersionPropertyName() + "=" + this.bomsEeServerVersion()))));
-		// a maven mirror for internal testable artifacts, i.e. which are not released
-		// yet, can be provided
+		// let's forward the profile for building the application...
+		final String buildProfile = DeploymentProperties.getWildflyDeploymentsBuildProfile();
+		result = result.concat(StringUtils.isBlank(buildProfile) ? "" : " -Pbuild-profile." + buildProfile);
+		// ... and the build stream too
+		if (!DeploymentProperties.isCommunityDeploymentsBuildStreamEnabled()) {
+			final String deploymentStream = DeploymentProperties.getWildflyDeploymentsBuildStream();
+			result = result.concat(StringUtils.isBlank(deploymentStream) ? "" : " -Pbuild-stream." + deploymentStream);
+		}
+		// a maven mirror for testable artifacts, i.e. which are not released yet, can be provided
 		result += result.concat((!StringUtils.isBlank(this.getMavenMirrorUrl())
 				? ""
 				: " -Dmaven-mirror.url=" + this.getMavenMirrorUrl()));

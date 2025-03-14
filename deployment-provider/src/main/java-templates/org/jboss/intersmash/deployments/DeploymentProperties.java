@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Class loads .properties from resources and provides method to get properties.
+ * Loads project and system properties that relate to Intersmash applications, and provides methods to access them.
  */
 public class DeploymentProperties {
 	public static final String WILDFLY_DEPLOYMENTS_BUILD_PROFILE_VALUE_EAP = "eap";
@@ -42,12 +42,25 @@ public class DeploymentProperties {
 		return "${project.basedir}";
 	}
 
+	/**
+	 * Get the configured WildFly/EAP 8.x application <b>build profile</b>, i.e. whether the application is built out of
+	 * either community (WildFly) bits, or based on productised (JBoss EAP and JBoss EAP XP) bits.
+	 * @return A string representing the application <b>build profile</b>, i.e. {@code eap} or {@code eapxp} for
+	 * JBoss EAP and EAP XP respectively, or an empty string for a WildFly (community bits) based application.
+	 */
 	public static String getWildflyDeploymentsBuildProfile() {
-		return "${intersmash.deployments.wildfly.build.profile}";
+		return "${intersmash.applications.wildfly.build.profile}";
 	}
 
+	/**
+	 * Get the configured WildFly/EAP 8.x application <b>build stream</b>, i.e. a given version stream that uniquely
+	 * identifies a supported version. For WildFly only one stream is supported, while {@code 8.0.z} and {@code 8.1.x}
+	 * JBoss EAP major version streams are supported. Similarly, JBoss EAP XP {@code 5.z} and {@code 6.z} are supported.
+	 * @return A string representing the application <b>build stream</b>, i.e. either {@code community},
+	 * {@code eap80}, {@code eap81}, {@code eapxp5} or {@code eapxp6}
+	 */
 	public static String getWildflyDeploymentsBuildStream() {
-		return "${intersmash.deployments.wildfly.build.stream}";
+		return "${intersmash.applications.wildfly.build.stream}";
 	}
 
 	public static Boolean isWildFlyDeploymentsBuildProfileEnabled() {
@@ -80,33 +93,5 @@ public class DeploymentProperties {
 
 	public static Boolean isEapXp6DeploymentsBuildStreamEnabled() {
 		return WILDFLY_DEPLOYMENTS_BUILD_STREAM_VALUE_EAP_XP6.equals(getWildflyDeploymentsBuildStream());
-	}
-
-	public static String getWildflyDeploymentVariantFromStream(final String deploymentStream) {
-		switch (deploymentStream) {
-			case DeploymentProperties.WILDFLY_DEPLOYMENTS_BUILD_STREAM_VALUE_EAP_80:
-			case DeploymentProperties.WILDFLY_DEPLOYMENTS_BUILD_STREAM_VALUE_EAP_81:
-				return "eap";
-			case DeploymentProperties.WILDFLY_DEPLOYMENTS_BUILD_STREAM_VALUE_EAP_XP5:
-			case DeploymentProperties.WILDFLY_DEPLOYMENTS_BUILD_STREAM_VALUE_EAP_XP6:
-				return "eapxp";
-			default:
-				throw new IllegalStateException("Unexpected value: " + deploymentStream);
-		}
-	}
-
-	public static String getWildflyDeploymentVariantProfileNameFromStream(final String deploymentStream) {
-		switch (deploymentStream) {
-			case DeploymentProperties.WILDFLY_DEPLOYMENTS_BUILD_STREAM_VALUE_EAP_80:
-				return "80";
-			case DeploymentProperties.WILDFLY_DEPLOYMENTS_BUILD_STREAM_VALUE_EAP_81:
-				return "81";
-			case DeploymentProperties.WILDFLY_DEPLOYMENTS_BUILD_STREAM_VALUE_EAP_XP5:
-				return "xp5";
-			case DeploymentProperties.WILDFLY_DEPLOYMENTS_BUILD_STREAM_VALUE_EAP_XP6:
-				return "xp6";
-			default:
-				throw new IllegalStateException("Unexpected value: " + deploymentStream);
-		}
 	}
 }

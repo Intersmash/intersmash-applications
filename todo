@@ -1,0 +1,7 @@
+- rename build-profile -> build-distribution
+- rename build-stream -> build-profile
+- build-distribution activated by build-profile
+- exclude specific profile test
+- document profiles
+- refactor: replace "deployments" -> "applications"
+- add more applications (Quarkus, OpenLiberty)
