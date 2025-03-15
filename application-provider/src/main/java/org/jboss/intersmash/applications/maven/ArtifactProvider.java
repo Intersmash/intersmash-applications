@@ -16,8 +16,6 @@
 package org.jboss.intersmash.applications.maven;
 
 import java.io.File;
-
-import org.eclipse.aether.resolution.ArtifactResolutionException;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.apache.maven.settings.building.SettingsBuildingException;
 import org.eclipse.aether.DefaultRepositorySystemSession;
@@ -27,6 +25,7 @@ import org.eclipse.aether.artifact.Artifact;
 import org.eclipse.aether.artifact.DefaultArtifact;
 import org.eclipse.aether.repository.LocalRepository;
 import org.eclipse.aether.resolution.ArtifactRequest;
+import org.eclipse.aether.resolution.ArtifactResolutionException;
 import org.eclipse.aether.resolution.ArtifactResult;
 import org.eclipse.aether.supplier.RepositorySystemSupplier;
 
@@ -48,7 +47,8 @@ import org.eclipse.aether.supplier.RepositorySystemSupplier;
 public class ArtifactProvider {
 
 	/**
-	 * Resolves an artifact coordinates (GAV), plus type and classifier to an actual artifact file.
+	 * Resolves an artifact coordinates (GAV), plus type and classifier to an actual
+	 * artifact file.
 	 *
 	 * @param groupId
 	 *            - required
@@ -61,7 +61,8 @@ public class ArtifactProvider {
 	 * @param classifier
 	 *            optional - might be null
 	 *
-	 * @return {@link File} instance holding the artifact found based on the input parameters (GAV + type and classifier)
+	 * @return {@link File} instance holding the artifact found based on the input
+	 *         parameters (GAV + type and classifier).
 	 */
 	public static File resolveArtifact(String groupId, String artifactId, String version, String type,
 			String classifier) throws SettingsBuildingException, ArtifactResolutionException {

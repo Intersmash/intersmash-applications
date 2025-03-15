@@ -91,7 +91,7 @@ public interface WildflyApplicationConfiguration {
 	}
 
 	/**
-	 * Server version property name for BOMs
+	 * Server version property name for BOMs.
 	 *
 	 * @return A string that represents the name of a property which could hold a
 	 *         given WILDFLY 8 application testable BOMs version
@@ -102,7 +102,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the
-	 * "wildfly-galleon-pack" feature pack GAV
+	 * "wildfly-galleon-pack" feature pack GAV.
 	 *
 	 * @return property name in the pom.xml file used to set the feature pack GAV
 	 */
@@ -112,7 +112,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the
-	 * "wildfly-ee-galleon-pack" feature pack GAV
+	 * "wildfly-ee-galleon-pack" feature pack GAV.
 	 *
 	 * @return property name in the pom.xml file used to set the feature pack GAV
 	 */
@@ -122,7 +122,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the
-	 * "wildfly-cloud-galleon-pack" feature pack GAV
+	 * "wildfly-cloud-galleon-pack" feature pack GAV.
 	 *
 	 * @return property name in the pom.xml file used to set the cloud feature pack
 	 *         GAV
@@ -133,7 +133,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the
-	 * "wildfly-datasources-galleon-pack" feature pack GAV
+	 * "wildfly-datasources-galleon-pack" feature pack GAV.
 	 *
 	 * @return property name in the pom.xml file used to set the datasources feature
 	 *         pack GAV
@@ -144,7 +144,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the
-	 * "wildfly.keycloak-saml-adapter-feature-pack.version" feature pack version
+	 * "wildfly.keycloak-saml-adapter-feature-pack.version" feature pack version.
 	 *
 	 * @return property name in the pom.xml file used to set the Keycloack SAML
 	 *         Adapter feature pack version
@@ -155,7 +155,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the channel
-	 * GroupId
+	 * GroupId.
 	 *
 	 * @return property name in the pom.xml file used to set the channel artifact
 	 *         groupId
@@ -166,7 +166,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the channel
-	 * ArtifactId
+	 * ArtifactId.
 	 *
 	 * @return property name in the pom.xml file used to set the channel artifact
 	 *         artifactId
@@ -177,7 +177,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the channel
-	 * Version
+	 * Version.
 	 *
 	 * @return property name in the pom.xml file used to set the channel artifact
 	 *         version
@@ -188,7 +188,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the channel
-	 * GAV
+	 * GAV.
 	 *
 	 * @return property name in the pom.xml file used to set the channel GAV
 	 */
@@ -198,7 +198,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the
-	 * "wildfly-maven-plugin" groupId
+	 * "wildfly-maven-plugin" groupId.
 	 *
 	 * @return property name in the pom.xml file used to set the
 	 *         "wildfly-maven-plugin" groupId
@@ -209,7 +209,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the
-	 * "wildfly-maven-plugin" artifactId
+	 * "wildfly-maven-plugin" artifactId.
 	 *
 	 * @return property name in the pom.xml file used to set the
 	 *         "wildfly-maven-plugin" artifactId
@@ -220,7 +220,7 @@ public interface WildflyApplicationConfiguration {
 
 	/**
 	 * This must match the property name in the pom.xml file used to set the
-	 * "wildfly-maven-plugin" version
+	 * "wildfly-maven-plugin" version.
 	 *
 	 * @return property name in the pom.xml file used to set the
 	 *         "wildfly-maven-plugin" version
@@ -230,12 +230,15 @@ public interface WildflyApplicationConfiguration {
 	}
 
 	/**
-	 *  Build a string that will be used to set the {@code MAVEN_ARGS_APPEND} environment variable
-	 * 	of a s2i build configuration. This way all relevant system properties and profiles which should be
-	 * 	used to build a WildFly/JBoss EAP 8.x or JBoss EAP XP application conveniently, i.e. with the expected bits and
-	 * 	configuration, can be forwarded to a remote s2i build.
-	 * @return A string that will be set as the value for the {@code MAVEN_ARGS_APPEND} environment variable
-	 * of a s2i build configuration.
+	 * Build a string that will be used to set the {@code MAVEN_ARGS_APPEND}
+	 * environment variable of a s2i build configuration. This way all relevant
+	 * system properties and profiles which should be used to build a WildFly/JBoss
+	 * EAP 8.x or JBoss EAP XP application conveniently, i.e. with the expected bits
+	 * and configuration, can be forwarded to a remote s2i build.
+	 * 
+	 * @return A string that will be set as the value for the
+	 *         {@code MAVEN_ARGS_APPEND} environment variable of a s2i build
+	 *         configuration.
 	 */
 	default String generateAdditionalMavenArgs() {
 		String result = "".concat(((StringUtils.isBlank(this.eeFeaturePackLocation())
@@ -286,9 +289,11 @@ public interface WildflyApplicationConfiguration {
 		// ... and the build stream too
 		if (!ApplicationConfigurationProperties.isCommunityApplicationBuildStreamEnabled()) {
 			final String applicationStream = ApplicationConfigurationProperties.getWildflyApplicationBuildStream();
-			result = result.concat(StringUtils.isBlank(applicationStream) ? "" : " -Pbuild-stream." + applicationStream);
+			result = result
+					.concat(StringUtils.isBlank(applicationStream) ? "" : " -Pbuild-stream." + applicationStream);
 		}
-		// a maven mirror for testable artifacts, i.e. which are not released yet, can be provided
+		// a maven mirror for testable artifacts, i.e. which are not released yet, can
+		// be provided
 		result += result.concat((!StringUtils.isBlank(this.getMavenMirrorUrl())
 				? ""
 				: " -Dmaven-mirror.url=" + this.getMavenMirrorUrl()));
