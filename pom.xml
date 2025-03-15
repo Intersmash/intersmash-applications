@@ -16,7 +16,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <version.maven>3.9.9</version.maven>
+        <version.maven>3.9.9.redhat-00001</version.maven>
         <version.maven-resolver>2.0.7</version.maven-resolver>
         <version.maven-aether-provider>3.3.9</version.maven-aether-provider>
         <version.commons-lang3>3.17.0</version.commons-lang3>
