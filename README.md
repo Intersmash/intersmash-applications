@@ -1,3 +1,3 @@
 # Intersmash Applications
 
-Applications to be used in Intersmash tests.
+Applications used by Intersmash tests.
