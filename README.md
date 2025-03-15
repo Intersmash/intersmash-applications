@@ -1,2 +1,3 @@
-# intersmash-deployments
-Application services deployments to be used in Intersmash tests
+# Intersmash Applications
+
+Applications to be used in Intersmash tests.
