@@ -1,6 +1,5 @@
 name: Intersmash Applications - Simple build workflow
 
-
 on:
   push:
     branches:
