@@ -93,7 +93,7 @@ public class SpecifyPartitionBean {
 		Message<Integer> msg = Message.of(i);
 
 		OutgoingKafkaRecordMetadata.OutgoingKafkaRecordMetadataBuilder<String> mb = OutgoingKafkaRecordMetadata
-				.<String>builder().withKey("KEY-" + i);
+				.<String> builder().withKey("KEY-" + i);
 
 		if (i > 10) {
 			mb.withPartition(1);
@@ -127,7 +127,7 @@ public class SpecifyPartitionBean {
 		Message<Integer> msg = Message.of(i);
 
 		OutgoingKafkaRecordMetadata.OutgoingKafkaRecordMetadataBuilder<String> mb = OutgoingKafkaRecordMetadata
-				.<String>builder().withKey("KEY-" + i);
+				.<String> builder().withKey("KEY-" + i);
 		if (i > 10) {
 			mb.withPartition(0);
 		}
