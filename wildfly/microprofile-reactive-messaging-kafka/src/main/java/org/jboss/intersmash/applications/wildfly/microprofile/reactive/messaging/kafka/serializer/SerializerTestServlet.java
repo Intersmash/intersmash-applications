@@ -97,8 +97,8 @@ public class SerializerTestServlet extends HttpServlet {
 	}
 
 	private boolean checkDataOrder(Map<Integer, List<Person>> actualMap, PrintWriter pw) {
-		String[] expectedOrder = {"Kabir", "Bob", "Roger", "Franta", "Pepa", "Karel", "Jaromir", "Vita", "Suzie",
-				"Paja"};
+		String[] expectedOrder = { "Kabir", "Bob", "Roger", "Franta", "Pepa", "Karel", "Jaromir", "Vita", "Suzie",
+				"Paja" };
 
 		for (String item : expectedOrder) {
 			if (assertPersonNextOnAPartition(actualMap, item) == null) {

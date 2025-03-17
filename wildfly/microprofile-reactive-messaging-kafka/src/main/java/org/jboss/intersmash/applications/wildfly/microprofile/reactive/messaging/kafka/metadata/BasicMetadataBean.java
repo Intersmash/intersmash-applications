@@ -88,14 +88,14 @@ public class BasicMetadataBean {
 		Message<Integer> msg = Message.of(i);
 
 		OutgoingKafkaRecordMetadata.OutgoingKafkaRecordMetadataBuilder<String> mb = OutgoingKafkaRecordMetadata
-				.<String>builder();
+				.<String> builder();
 		if (i % 2 == 0) {
 			// Only set the key for half the messages
 			mb.withKey("KEY-" + i);
 		}
 		if (i % 2 != 0) {
 			// Set some headers and timestamp for half the messages
-			mb.withHeaders(Collections.singletonList(new RecordHeader("header-" + i, new byte[]{0, 1, 2})));
+			mb.withHeaders(Collections.singletonList(new RecordHeader("header-" + i, new byte[] { 0, 1, 2 })));
 			mb.withTimestamp(timestamp);
 		}
 		if (i >= 3) {
