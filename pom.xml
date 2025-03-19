@@ -29,6 +29,7 @@
     </properties>
 
     <modules>
+        <module>style-config</module>
         <module>wildfly</module>
         <module>application-provider</module>
     </modules>
@@ -127,24 +128,25 @@
                     <groupId>com.diffplug.spotless</groupId>
                     <artifactId>spotless-maven-plugin</artifactId>
                     <version>${version.spotless-maven-plugin}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.jboss.intersmash.applications</groupId>
+                            <artifactId>style-config</artifactId>
+                            <version>${project.version}</version>
+                        </dependency>
+                    </dependencies>
                     <configuration>
                         <java>
                             <removeUnusedImports/>
                             <importOrder/>
                             <eclipse>
-                                <file>eclipse-formatter.xml</file>
+                                <file>org/jboss/intersmash/applications/configs/eclipse-formatter.xml</file>
                             </eclipse>
                         </java>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
 
     <repositories>
