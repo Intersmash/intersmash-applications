@@ -60,7 +60,7 @@
                         <warName>ROOT</warName>
                     </configuration>
                 </plugin>
-                <!-- WildFly/EAP 8.z applications use the WildFly Maven plugin to package -->
+                <!-- WildFly/JBoss EAP 8.z applications use the WildFly Maven plugin to package -->
                 <plugin>
                     <groupId>${wildfly-maven-plugin.groupId}</groupId>
                     <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
