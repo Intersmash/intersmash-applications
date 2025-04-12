@@ -49,10 +49,8 @@
         <version.maven>3.9.9</version.maven>
         <version.maven-resolver>2.0.7</version.maven-resolver>
         <version.maven-aether-provider>3.3.9</version.maven-aether-provider>
-        <version.commons-lang3>3.17.0</version.commons-lang3>
         <version.templating-maven-plugin>3.0.0</version.templating-maven-plugin>
         <version.spotless-maven-plugin>2.44.3</version.spotless-maven-plugin>
-        <version.system-stubs-core>2.1.8</version.system-stubs-core>
         <version.junit-jupiter>5.11.3</version.junit-jupiter>
         <version.mockito>5.15.2</version.mockito>
         <version.maven-surefire-plugin>3.5.2</version.maven-surefire-plugin>
@@ -66,12 +64,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${version.commons-lang3}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.apache.maven.resolver</groupId>
                 <artifactId>maven-resolver-api</artifactId>
@@ -124,12 +116,6 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
                 <version>${version.junit-jupiter}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>uk.org.webcompere</groupId>
-                <artifactId>system-stubs-jupiter</artifactId>
-                <version>${version.system-stubs-core}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

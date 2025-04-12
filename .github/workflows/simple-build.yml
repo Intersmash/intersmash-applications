@@ -39,4 +39,4 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build with Maven
-        run:  mvn -version ; mvn clean install --batch-mode -Pbuild-distribution.eapxp,build-stream.eapxp6
+        run:  mvn -version ; mvn clean install --batch-mode -Pwildfly-build-stream.jboss-eap-xp.6,wildfly-target-distribution.jboss-eap-xp
