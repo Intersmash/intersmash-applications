@@ -15,28 +15,23 @@
 */
 package org.jboss.intersmash.applications.wildfly;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import org.jboss.intersmash.applications.ApplicationProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-/**
- * Verifies {@link WildflyApplicationConfiguration} functionality, based on
- * documented WildFly application build profiles.
- */
-public class EapXpApplicationBuildProfilesTest {
+public class EapXpBuildStreamTest {
 
 	@Test
-	void generatedMavenArgsIncludeValidProfiles() {
-		// Arrange not needed because this test is based on compiled
-		// ApplicationConfigurationProperties and included selectively by
-		// the Surefire Maven Plugin...
+	void validateEapXPBuildProvisioningFile() throws IOException {
+		final Path provisionedServerPath = Path
+				.of(ApplicationProvider.wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath() +
+						"/.wildfly-maven-plugin-provisioning.xml");
+		String provisioningFileContents = Files.readString(provisionedServerPath);
 
-		// Act
-		WildflyApplicationConfiguration app = new WildflyApplicationConfiguration() {
-		};
-		final String mavenArgs = app.generateAdditionalMavenArgs();
-
-		// Assert
-		Assertions.assertTrue(mavenArgs.contains(" -Pbuild-distribution.eap"));
-		Assertions.assertTrue(mavenArgs.contains(" -Pbuild-stream.eapxp")); // + ("5"|"6")
+		Assertions.assertTrue(
+				provisioningFileContents.contains("<feature-pack location=\"org.jboss.eap.xp:wildfly-galleon-pack"));
 	}
 }

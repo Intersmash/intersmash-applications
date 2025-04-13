@@ -119,7 +119,7 @@
 
     <profiles>
         <profile>
-            <id>build-distribution.eap</id>
+            <id>wildfly-target-distribution.jboss-eap</id>
             <build>
                 <pluginManagement>
                     <plugins>
@@ -172,9 +172,9 @@
         </profile>
 
         <profile>
-            <id>build-distribution.eapxp</id>
+            <id>wildfly-target-distribution.jboss-eap-xp</id>
             <properties>
-                <!-- EAP XP z Channel coordinates -->
+                <!-- JBoss EAP XP Channel coordinates -->
                 <wildfly.xp-channel.groupId>org.jboss.eap.channels</wildfly.xp-channel.groupId>
                 <wildfly.xp-channel.artifactId>eap-xp-5.0</wildfly.xp-channel.artifactId>
                 <wildfly.xp-channel.version>1.0.0.GA-redhat-00006</wildfly.xp-channel.version>
@@ -236,9 +236,9 @@
             </build>
         </profile>
         <profile>
-            <id>build-stream.eapxp6</id>
+            <id>wildfly-build-stream.jboss-eap-xp.6</id>
             <properties>
-                <!-- WildFly/EAP 8.z Maven Plugin coordinates -->
+                <!-- WildFly/JBoss EAP 8.z Maven Plugin coordinates -->
                 <wildfly-maven-plugin.groupId>org.jboss.eap.plugins</wildfly-maven-plugin.groupId>
                 <wildfly-maven-plugin.artifactId>eap-maven-plugin</wildfly-maven-plugin.artifactId>
                 <wildfly-maven-plugin.version>1.0.0.Final-redhat-00014</wildfly-maven-plugin.version>
@@ -249,7 +249,7 @@
                 <!-- FPLs -->
                 <wildfly.feature-pack.location>org.jboss.eap.xp:wildfly-galleon-pack:5.0.0.GA-redhat-00005</wildfly.feature-pack.location>
                 <wildfly.cloud-feature-pack.location>org.jboss.eap.cloud:eap-cloud-galleon-pack:1.0.0.Final-redhat-00008</wildfly.cloud-feature-pack.location>
-                <!-- EAP 8.z Channel coordinates -->
+                <!-- EAP 8.1.x Channel coordinates -->
                 <wildfly.ee-channel.groupId>org.jboss.eap.channels</wildfly.ee-channel.groupId>
                 <wildfly.ee-channel.artifactId>eap-8.0</wildfly.ee-channel.artifactId>
                 <wildfly.ee-channel.version>1.0.1.GA-redhat-00003</wildfly.ee-channel.version>
