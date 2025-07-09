@@ -44,8 +44,11 @@
 
     <modules>
         <!--
-            No modules can be built by default yet, as the existing one requires MicroProfile support, which
-            JBoss EAP 8 does not provide. Modules are built selectively, see the profiles' configuration below
+            Application related submodules are listed per profile, see below.
+
+            Those supported only by specific variants (e.g.: requiring MicroProfile integration) are defined in
+            relevant profiles, see below.
+            JBoss EAP does not support MicroProfile, therefore related applications' submodules are not defined here.
         -->
     </modules>
 
@@ -135,12 +138,17 @@
 
     <profiles>
         <profile>
-            <id>all-modules</id>
+            <id>wildfly-target-distribution.wildfly</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <!--
+                Default profile, which is activated when a different specific profile is not enabled.
+                Will build all the applications modules, like in the WildFly variant use case.
+            -->
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
+                <module>elytron-oidc-client-keycloak</module>
             </modules>
         </profile>
         <profile>
@@ -163,6 +171,9 @@
                 <wildfly.ee-channel.artifactId>eap-8.1</wildfly.ee-channel.artifactId>
                 <wildfly.ee-channel.version>1.0.0.Beta-redhat-00023</wildfly.ee-channel.version>
             </properties>
+            <modules>
+                <module>elytron-oidc-client-keycloak</module>
+            </modules>
             <build>
                 <pluginManagement>
                     <plugins>
@@ -236,8 +247,12 @@
                 <wildfly.xp-channel.artifactId>eap-xp-5.0</wildfly.xp-channel.artifactId>
                 <wildfly.xp-channel.version>1.1.0.GA-redhat-00001</wildfly.xp-channel.version>
             </properties>
+            <!--
+                The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
+            -->
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
+                <module>elytron-oidc-client-keycloak</module>
             </modules>
             <build>
                 <pluginManagement>
