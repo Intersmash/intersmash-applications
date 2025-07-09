@@ -1,6 +1,6 @@
 # Intersmash Applications - WildFly MicroProfile Reactive Messaging + Kafka
 
-A WildFly/EAP 8.z MicroProfile Reactive Messaging application, which is configured to use a remote Kafka/Streams for 
+A WildFly/JBoss EAP XP MicroProfile Reactive Messaging application, which is configured to use a remote Kafka/Streams for 
 Apache Kafka service.
 
 The WildFly/EAP Maven plugin is configured to build the application and trimmed server, based on required feature packs.

@@ -30,19 +30,16 @@ import org.eclipse.aether.resolution.ArtifactResult;
 import org.eclipse.aether.supplier.RepositorySystemSupplier;
 
 /**
- * Class provides support to get artifact by GAV from local repo (considered as
- * remote). Local repositories:
+ * Class provides support to get artifact by GAV from local repo (considered as remote). Local repositories:
  * <ul>
  * <li>local repository from maven settings
- * <ul>
  * <li>M2_HOME/conf/settings.xml as global settings</li>
  * <li>user.home/.m2/settings.xml as local settings</li>
  * </ul>
- * if not available, user.home/.m2/repository is considered</li>
- * <li>sys property localRepository if given (result from
- * -Dmaven.repo.local)</li>
- * </ul>
- * maven central and such repositories are not supported.
+ * If not available, user.home/.m2/repository is considered
+ * or sys property localRepository if given (result from -Dmaven.repo.local)
+ *
+ * Maven central and such repositories are not supported.
  */
 public class ArtifactProvider {
 

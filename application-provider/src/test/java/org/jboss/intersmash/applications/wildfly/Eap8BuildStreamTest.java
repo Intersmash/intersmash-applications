@@ -19,23 +19,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
-import org.jboss.intersmash.applications.ApplicationProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * This class is executed when building applications for JBoss EAP XP, to verify that the specific bits are used.
+ * This class is executed when building applications for JBoss EAP 8.x, to verify that the specific bits are used.
  */
-public class EapXpBuildStreamTest {
+public class Eap8BuildStreamTest {
 
 	/**
-	 * Verifies that JBoss EAP XP applications' provisioning file contains the JBoss EAP XP
-	 * {@code wildfly-galleon-pack} declaration.
+	 * Verifies that JBoss EAP 8.x applications' provisioning file contains the JBoss EAP
+	 * {@code wildfly-ee-galleon-pack} declaration.
 	 */
 	@Test
-	void validateEapXPBuildProvisioningFile() throws IOException {
-		final Stream<Path> provisionedServerPaths = Stream.of(
-				ApplicationProvider.wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath());
+	void validateEap81BuildProvisioningFile() throws IOException {
+		final Stream<Path> provisionedServerPaths = Stream.of(/* no JBoss EAP 8 apps yet... */);
+
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path
 					.of(path + "/.wildfly-maven-plugin-provisioning.xml");
@@ -43,7 +42,7 @@ public class EapXpBuildStreamTest {
 			try {
 				provisioningFileContents = Files.readString(provisionedServerPath);
 				Assertions.assertTrue(
-						provisioningFileContents.contains("<feature-pack location=\"org.jboss.eap.xp:wildfly-galleon-pack"));
+						provisioningFileContents.contains("<feature-pack location=\"org.jboss.eap:wildfly-ee-galleon-pack"));
 			} catch (IOException e) {
 				Assertions.fail(e);
 			}
