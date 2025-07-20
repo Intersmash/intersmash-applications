@@ -19,19 +19,6 @@
         <version.smallrye-reactive-messaging-kafka-api>3.18.0</version.smallrye-reactive-messaging-kafka-api>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- Lock all the provided dependencies to match the WildFly/EAP version -->
-            <dependency>
-                <groupId>${bom.wildfly-ee.groupId}</groupId>
-                <artifactId>${bom.wildfly-ee.artifactId}</artifactId>
-                <version>${bom.wildfly-ee.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>jakarta.servlet</groupId>
@@ -115,10 +102,6 @@
                         </packaging-script>
                     </packaging-scripts>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
