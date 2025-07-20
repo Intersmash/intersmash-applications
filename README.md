@@ -1,8 +1,8 @@
 # Intersmash Applications
 
-Applications used by Intersmash tests.
-
 ![Simple build workflow](https://github.com/Intersmash/intersmash-applications/actions/workflows/simple-build.yml/badge.svg)
+
+Applications used by Intersmash tests.
 
 ## Overview 
 
@@ -11,7 +11,7 @@ The goal is to have a common repository for applications that can be used to tes
 The applications are grouped by category, and their POM configuration is designed in a way that allows to build them 
 either out of community or product bits. 
 For example the WildFly applications in the [wildfly](./wildfly) submodule can generate either WildFly or 
-JBoss EAP 8.1.x)/JBoss EAP XP (6.x) applications, see the [wildfly](./wildfly/README.md) module documentation 
+JBoss EAP/JBoss EAP XP applications, see the [wildfly](./wildfly/README.md) module documentation 
 for additional details.
 
 The applications can be built locally or in cloud native environments, e.g.: via the s2i process on OpenShift. 

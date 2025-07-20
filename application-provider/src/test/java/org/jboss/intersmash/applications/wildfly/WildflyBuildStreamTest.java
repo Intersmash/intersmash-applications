@@ -20,12 +20,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 import org.jboss.intersmash.applications.ApplicationProvider;
+import org.jboss.intersmash.applications.jupiter.annotations.WildflyTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * This class is executed when building applications for WildFly, to verify that the specific bits are used.
  */
+@WildflyTest
 public class WildflyBuildStreamTest {
 
 	/**

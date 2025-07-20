@@ -25,7 +25,7 @@ jobs:
       - name: Build with Maven
         run:  mvn -version ; mvn clean install --batch-mode
 
-  simple-build-eap-81:
+  simple-build-eap:
     if: '! github.event.pull_request.draft'
     runs-on: ubuntu-latest
 
@@ -39,9 +39,9 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build with Maven
-        run:  mvn -version ; mvn clean install --batch-mode -Pwildfly-build-stream.jboss-eap.81,wildfly-target-distribution.jboss-eap '-Dgroups=!wildfly-target-distribution.requires-microprofile'
+        run:  mvn -version ; mvn clean install --batch-mode -Pwildfly-target-distribution.jboss-eap
 
-  simple-build-eap-xp6:
+  simple-build-eap-xp:
     if: '! github.event.pull_request.draft'
     runs-on: ubuntu-latest
 
@@ -55,4 +55,4 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build with Maven
-        run:  mvn -version ; mvn clean install --batch-mode -Pwildfly-build-stream.jboss-eap-xp.6,wildfly-target-distribution.jboss-eap-xp
+        run:  mvn -version ; mvn clean install --batch-mode -Pwildfly-target-distribution.jboss-eap-xp

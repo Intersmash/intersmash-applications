@@ -19,21 +19,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
+import org.jboss.intersmash.applications.jupiter.annotations.EapTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * This class is executed when building applications for JBoss EAP 8.x, to verify that the specific bits are used.
+ * This class is executed when building applications for JBoss EAP, to verify that the specific bits are used.
  */
-public class Eap8BuildStreamTest {
+@EapTest
+public class EapBuildStreamTest {
 
 	/**
-	 * Verifies that JBoss EAP 8.x applications' provisioning file contains the JBoss EAP
+	 * Verifies that JBoss EAP applications' provisioning file contains the JBoss EAP
 	 * {@code wildfly-ee-galleon-pack} declaration.
 	 */
 	@Test
-	void validateEap81BuildProvisioningFile() throws IOException {
-		final Stream<Path> provisionedServerPaths = Stream.of(/* no JBoss EAP 8 apps yet... */);
+	void validateEapBuildProvisioningFile() throws IOException {
+		final Stream<Path> provisionedServerPaths = Stream.of(/* no JBoss EAP apps yet... */);
 
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path
