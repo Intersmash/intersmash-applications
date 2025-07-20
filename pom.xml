@@ -28,9 +28,9 @@
     <developers>
         <developer>
             <name>Fabio Burzigotti</name>
-            <email>fburzigo@redhat.com</email>
-            <organization>Red Hat</organization>
-            <organizationUrl>http://www.redhat.com</organizationUrl>
+            <email>fburzigo@ibm.com</email>
+            <organization>IBM</organization>
+            <organizationUrl>https://www.ibm.com</organizationUrl>
         </developer>
     </developers>
 
@@ -164,6 +164,11 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+            </plugin>
+            <!-- TODO: decide whether to keep this, i.e. to publish the application-provider -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>

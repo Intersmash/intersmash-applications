@@ -46,6 +46,19 @@
         <module>microprofile-reactive-messaging-kafka</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- Lock all the provided dependencies to match the WildFly/EAP version -->
+            <dependency>
+                <groupId>${bom.wildfly-ee.groupId}</groupId>
+                <artifactId>${bom.wildfly-ee.artifactId}</artifactId>
+                <version>${bom.wildfly-ee.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <pluginManagement>
             <plugins>

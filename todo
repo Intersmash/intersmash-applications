@@ -1,2 +1,0 @@
-- refactor: replace "deployments" -> "applications"
-- add more applications (Quarkus, OpenLiberty)
