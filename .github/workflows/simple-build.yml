@@ -25,6 +25,22 @@ jobs:
       - name: Build with Maven
         run:  mvn -version ; mvn clean install --batch-mode
 
+  simple-build-eap-81:
+    if: '! github.event.pull_request.draft'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Build with Maven
+        run:  mvn -version ; mvn clean install --batch-mode -Pwildfly-build-stream.jboss-eap.81,wildfly-target-distribution.jboss-eap '-Dgroups=!wildfly-target-distribution.requires-microprofile'
+
   simple-build-eap-xp6:
     if: '! github.event.pull_request.draft'
     runs-on: ubuntu-latest
