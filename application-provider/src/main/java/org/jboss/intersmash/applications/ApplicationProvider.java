@@ -32,11 +32,11 @@ public class ApplicationProvider {
 
 	/**
 	 * Provides access to a filesystem directory containing a server provisioned by
-	 * the WildFly/EAP 8.x Maven plugin, which is generated from the
+	 * the WildFly/JBoss EAP Maven plugin, which is generated from the
 	 * {@code wildfly-microprofile-reactive-messaging-kafka} application
 	 *
 	 * @return {@link Path} instance that identifies the directory containing the
-	 *         WildFly/EAP 8.x provisioned server.
+	 *         WildFly/JBoss EAP provisioned server.
 	 */
 	public static Path wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath() {
 		return findApplicationDirectory("wildfly", "microprofile-reactive-messaging-kafka", "target", "server");
@@ -79,6 +79,6 @@ public class ApplicationProvider {
 			return path;
 		}
 		throw new RuntimeException(
-				"Cannot find the provisioned WildFly/EAP 8.x server directory: " + path.toFile().getAbsolutePath());
+				"Cannot find the provisioned WildFly/JBoss EAP server directory: " + path.toFile().getAbsolutePath());
 	}
 }

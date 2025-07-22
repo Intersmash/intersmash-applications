@@ -20,12 +20,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 import org.jboss.intersmash.applications.ApplicationProvider;
+import org.jboss.intersmash.applications.jupiter.annotations.EapXpTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * This class is executed when building applications for JBoss EAP XP, to verify that the specific bits are used.
  */
+@EapXpTest
 public class EapXpBuildStreamTest {
 
 	/**
@@ -33,7 +35,7 @@ public class EapXpBuildStreamTest {
 	 * {@code wildfly-galleon-pack} declaration.
 	 */
 	@Test
-	void validateEapXPBuildProvisioningFile() throws IOException {
+	void validateEapXpBuildProvisioningFile() throws IOException {
 		final Stream<Path> provisionedServerPaths = Stream.of(
 				ApplicationProvider.wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath());
 		provisionedServerPaths.forEach((path) -> {

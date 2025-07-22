@@ -14,6 +14,10 @@
 
     <name>Intersmash Applications :: Application Provider</name>
 
+    <properties>
+        <excludedGroups.by-wildfly-target-distribution>eap,eap-xp</excludedGroups.by-wildfly-target-distribution>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.maven.resolver</groupId>
@@ -88,10 +92,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <excludes>
-                        <exclude>**/EapXpBuildStreamTest</exclude>
-                        <exclude>**/Eap8BuildStreamTest</exclude>
-                    </excludes>
+                    <excludedGroups>${excludedGroups.by-wildfly-target-distribution}</excludedGroups>
                 </configuration>
             </plugin>
             <plugin>
@@ -126,37 +127,15 @@
     <profiles>
         <profile>
             <id>wildfly-target-distribution.jboss-eap</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <excludes>
-                                <exclude>**/WildflyBuildStreamTest</exclude>
-                                <exclude>**/EapXpBuildStreamTest</exclude>
-                            </excludes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <excludedGroups.by-wildfly-target-distribution>wildfly,eap-xp</excludedGroups.by-wildfly-target-distribution>
+            </properties>
         </profile>
         <profile>
             <id>wildfly-target-distribution.jboss-eap-xp</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <excludes>
-                                <exclude>**/WildflyBuildStreamTest</exclude>
-                                <exclude>**/Eap8BuildStreamTest</exclude>
-                            </excludes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <excludedGroups.by-wildfly-target-distribution>wildfly,eap</excludedGroups.by-wildfly-target-distribution>
+            </properties>
         </profile>
     </profiles>
 </project>
