@@ -22,11 +22,11 @@ import java.lang.annotation.Target;
 import org.junit.jupiter.api.Tag;
 
 /**
- * Marks a WildFly specific test.
- * Used per class.
+ * Mark tests that require WildFly distributions that support MicroProfile, i.e. either WildFly itself or JBoss EAP XP.
+ * Used both on class and method types.
  */
-@Tag("wildfly")
+@Tag("wildfly-target-distribution.requires-microprofile")
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.TYPE })
-public @interface WildflyTest {
+@Target({ java.lang.annotation.ElementType.TYPE, ElementType.METHOD })
+public @interface RequiresWildflyMicroProfileSupport {
 }
