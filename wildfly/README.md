@@ -14,6 +14,13 @@ JBoss EAP application, rather than a WildFly one, which is the default behavior.
 Adding `-Pwildfly-target-distribution.jboss-eap-xp` to the build will let Maven use the specifics for building a 
 JBoss EAP XP application, rather than a WildFly one, which is the default behavior.
 
+### `wildfly-target-distribution.jboss-eap-xp.merged-channel`
+
+Sometimes a single channel manifest can be used when building JBoss EAP XP applications, which is obtained by merging 
+the JBoss EAP and JBoss EAP XP requirements.
+Adding `-Pwildfly-target-distribution.jboss-eap-xp.merged-channel` allows provisioning JBoss EAP XP application out a 
+_merged_ channel manifest, as for example when testing JBoss EAP candidate releases (_CRs_).
+
 **IMPORTANT**:
 
 - When using `-Pwildfly-target-distribution.jboss-eap` the JBoss EAP 8.1 **Beta** GA bits coordinates will be used by 

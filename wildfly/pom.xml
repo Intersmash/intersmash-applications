@@ -295,5 +295,80 @@
                 </pluginManagement>
             </build>
         </profile>
+        <profile>
+            <!--
+                When building applications for JBoss EAP XP candidate releases, a unique channel manifest is used,
+                which is obtained by merging the JBoss EAP and JBoss EAP XP requirements.
+                The following profile covers such use case, i.e. to allow testing JBoss EAP XP CRs.
+            -->
+            <id>wildfly-target-distribution.jboss-eap-xp.merged-channel</id>
+            <properties>
+                <wildfly-maven-plugin.groupId>org.jboss.eap.plugins</wildfly-maven-plugin.groupId>
+                <wildfly-maven-plugin.artifactId>eap-maven-plugin</wildfly-maven-plugin.artifactId>
+                <wildfly-maven-plugin.version>1.0.0.Final-redhat-00014</wildfly-maven-plugin.version>
+                <!-- Default JBoss EAP XP `microprofile` BOM version is set here and can be overridden for pulling the right BOM -->
+                <bom.wildfly-microprofile.groupId>org.jboss.bom</bom.wildfly-microprofile.groupId>
+                <bom.wildfly-microprofile.artifactId>jboss-eap-xp-microprofile</bom.wildfly-microprofile.artifactId>
+                <bom.wildfly-microprofile.version>5.0.2.GA-redhat-00003</bom.wildfly-microprofile.version>
+                <!-- FPLs -->
+                <wildfly.feature-pack.location>org.jboss.eap.xp:wildfly-galleon-pack:5.0.3.GA-redhat-00003</wildfly.feature-pack.location>
+                <wildfly.cloud-feature-pack.location>org.jboss.eap.cloud:eap-cloud-galleon-pack:1.0.0.Final-redhat-00008</wildfly.cloud-feature-pack.location>
+                <!-- JBoss EAP Channel coordinates -->
+                <wildfly.ee-channel.groupId>org.jboss.eap.channels</wildfly.ee-channel.groupId>
+                <wildfly.ee-channel.artifactId>custom-artifact-ID</wildfly.ee-channel.artifactId>
+                <wildfly.ee-channel.version>CUSTOM_VERSION</wildfly.ee-channel.version>
+            </properties>
+            <modules>
+                <module>microprofile-reactive-messaging-kafka</module>
+            </modules>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>${wildfly-maven-plugin.groupId}</groupId>
+                            <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
+                            <version>${wildfly-maven-plugin.version}</version>
+                            <configuration>
+                                <filename>ROOT.war</filename>
+                                <feature-packs>
+                                    <feature-pack>
+                                        <location>${wildfly.feature-pack.location}</location>
+                                    </feature-pack>
+                                    <feature-pack>
+                                        <location>${wildfly.cloud-feature-pack.location}</location>
+                                    </feature-pack>
+                                </feature-packs>
+                                <channels>
+                                    <channel>
+                                        <manifest>
+                                            <groupId>${wildfly.ee-channel.groupId}</groupId>
+                                            <artifactId>${wildfly.ee-channel.artifactId}</artifactId>
+                                            <version>${wildfly.ee-channel.version}</version>
+                                        </manifest>
+                                    </channel>
+                                </channels>
+                                <layers>
+                                    <layer>cloud-default-config</layer>
+                                </layers>
+                                <!--
+                                    Both the Bootable JAR and Maven plugin are executed on some cases and their executions
+                                    might collide. Let's isolate the WildFly/JBoss EAP Maven plugin execution to be safe
+                                -->
+                                <galleon-options>
+                                    <jboss-fork-embedded>true</jboss-fork-embedded>
+                                </galleon-options>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>package</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
     </profiles>
 </project>
