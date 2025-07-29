@@ -137,5 +137,11 @@
                 <excludedGroups.by-wildfly-target-distribution>wildfly,eap</excludedGroups.by-wildfly-target-distribution>
             </properties>
         </profile>
+        <profile>
+            <id>wildfly-target-distribution.jboss-eap-xp.merged-channel</id>
+            <properties>
+                <excludedGroups.by-wildfly-target-distribution>wildfly,eap</excludedGroups.by-wildfly-target-distribution>
+            </properties>
+        </profile>
     </profiles>
 </project>
