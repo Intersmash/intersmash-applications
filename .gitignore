@@ -4,3 +4,4 @@
 /wildfly/microprofile-reactive-messaging-kafka/target/
 /application-provider/target/
 /style-config/target/
+/wildfly/elytron-oidc-client-keycloak/target/

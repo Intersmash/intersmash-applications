@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
+import org.jboss.intersmash.applications.ApplicationProvider;
 import org.jboss.intersmash.applications.jupiter.annotations.EapTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,8 +35,9 @@ public class EapBuildStreamTest {
 	 * {@code wildfly-ee-galleon-pack} declaration.
 	 */
 	@Test
-	void validateEapBuildProvisioningFile() throws IOException {
-		final Stream<Path> provisionedServerPaths = Stream.of(/* no JBoss EAP apps yet... */);
+	void validateEapBuildProvisioningFile() {
+		final Stream<Path> provisionedServerPaths = Stream.of(
+				ApplicationProvider.wildflyElytronOidcClientKeycloakProvisionedServerPath());
 
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path

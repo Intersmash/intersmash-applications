@@ -35,9 +35,10 @@ public class EapXpBuildStreamTest {
 	 * {@code wildfly-galleon-pack} declaration.
 	 */
 	@Test
-	void validateEapXpBuildProvisioningFile() throws IOException {
+	void validateEapXpBuildProvisioningFile() {
 		final Stream<Path> provisionedServerPaths = Stream.of(
-				ApplicationProvider.wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath());
+				ApplicationProvider.wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath(),
+				ApplicationProvider.wildflyElytronOidcClientKeycloakProvisionedServerPath());
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path
 					.of(path + "/.wildfly-maven-plugin-provisioning.xml");
