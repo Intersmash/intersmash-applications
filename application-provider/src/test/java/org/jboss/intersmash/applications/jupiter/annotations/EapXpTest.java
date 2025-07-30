@@ -27,6 +27,6 @@ import org.junit.jupiter.api.Tag;
  */
 @Tag("eap-xp")
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.TYPE, ElementType.METHOD })
+@Target({ ElementType.TYPE })
 public @interface EapXpTest {
 }

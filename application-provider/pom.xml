@@ -128,7 +128,7 @@
         <profile>
             <id>wildfly-target-distribution.jboss-eap</id>
             <properties>
-                <excludedGroups.by-wildfly-target-distribution>wildfly,eap-xp</excludedGroups.by-wildfly-target-distribution>
+                <excludedGroups.by-wildfly-target-distribution>wildfly,eap-xp,wildfly-target-distribution.requires-microprofile</excludedGroups.by-wildfly-target-distribution>
             </properties>
         </profile>
         <profile>
