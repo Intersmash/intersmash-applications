@@ -17,8 +17,7 @@ package org.jboss.intersmash.applications;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.jboss.intersmash.applications.jupiter.annotations.EapXpTest;
-import org.jboss.intersmash.applications.jupiter.annotations.WildflyTest;
+import org.jboss.intersmash.applications.jupiter.annotations.RequiresWildflyMicroProfileSupport;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -35,8 +34,7 @@ class ApplicationProviderTest {
 	 * exists.
 	 */
 	@Test
-	@WildflyTest
-	@EapXpTest
+	@RequiresWildflyMicroProfileSupport
 	void wildflyMicroprofileReactiveMessagingKafkaProvisionedServer_exists() {
 		Path appPath = null;
 		try {
@@ -52,8 +50,7 @@ class ApplicationProviderTest {
 	 * {@code wildfly-microprofile-reactive-messaging-kafka} application exists.
 	 */
 	@Test
-	@WildflyTest
-	@EapXpTest
+	@RequiresWildflyMicroProfileSupport
 	void wildflyMicroprofileReactiveMessagingKafkaDeployment_exists() {
 		Path appPath = null;
 		try {
