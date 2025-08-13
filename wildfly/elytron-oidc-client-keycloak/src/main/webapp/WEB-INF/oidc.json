@@ -1,0 +1,10 @@
+{
+    "realm": "basic-auth",
+    "resource": "wildfly-basic-elytron-auth-service",
+    "auth-server-url" : "${env.SSO_APP_SERVICE}",
+    "ssl-required" : "external",
+    "disable-trust-manager": "true",
+    "credentials": {
+        "secret": "password"
+    }
+}
