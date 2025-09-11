@@ -38,7 +38,8 @@ public class WildflyBuildStreamTest {
 	void validateWildflyBuildProvisioningFile() throws IOException {
 		final Stream<Path> provisionedServerPaths = Stream.of(
 				ApplicationProvider.wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath(),
-				ApplicationProvider.wildflyElytronOidcClientKeycloakProvisionedServerPath());
+				ApplicationProvider.wildflyElytronOidcClientKeycloakProvisionedServerPath(),
+				ApplicationProvider.wildflyWebCacheOffloadInfinispanProvisionedServerPath());
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path
 					.of(path + "/.wildfly-maven-plugin-provisioning.xml");

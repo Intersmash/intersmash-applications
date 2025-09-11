@@ -149,6 +149,7 @@
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
                 <module>elytron-oidc-client-keycloak</module>
+                <module>web-cache-offload-infinispan</module>
             </modules>
         </profile>
         <profile>
@@ -173,6 +174,7 @@
             </properties>
             <modules>
                 <module>elytron-oidc-client-keycloak</module>
+                <module>web-cache-offload-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -253,6 +255,7 @@
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
                 <module>elytron-oidc-client-keycloak</module>
+                <module>web-cache-offload-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -333,8 +336,13 @@
                 <wildfly.ee-channel.artifactId>custom-artifact-ID</wildfly.ee-channel.artifactId>
                 <wildfly.ee-channel.version>CUSTOM_VERSION</wildfly.ee-channel.version>
             </properties>
+            <!--
+                The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
+            -->
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
+                <module>elytron-oidc-client-keycloak</module>
+                <module>web-cache-offload-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>

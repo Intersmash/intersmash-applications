@@ -5,3 +5,4 @@
 /application-provider/target/
 /style-config/target/
 /wildfly/elytron-oidc-client-keycloak/target/
+/wildfly/web-cache-offload-infinispan/target/

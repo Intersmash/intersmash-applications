@@ -29,6 +29,7 @@ import org.jboss.intersmash.applications.maven.ArtifactProvider;
 public class ApplicationProvider {
 	static final String WILDFLY_MICROPROFILE_REACTIVE_MESSAGING_KAFKA_DEPLOYMENT = "wildfly-microprofile-reactive-messaging-kafka";
 	static final String WILDFLY_ELYTRON_OIDC_CLIENT_KEYCLOAK_DEPLOYMENT = "wildfly-elytron-oidc-client-keycloak";
+	static final String WILDFLY_WEB_CACHE_OFFLOAD_INFINISPAN_DEPLOYMENT = "wildfly-web-cache-offload-infinispan";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR = "war";
 
 	/**
@@ -53,6 +54,18 @@ public class ApplicationProvider {
 	 */
 	public static Path wildflyElytronOidcClientKeycloakProvisionedServerPath() {
 		return findApplicationDirectory("wildfly", "elytron-oidc-client-keycloak", "target", "server");
+	}
+
+	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code wildfly-web-cache-offload-infinispan} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyWebCacheOffloadInfinispanProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "web-cache-offload-infinispan", "target", "server");
 	}
 
 	/**
@@ -87,6 +100,26 @@ public class ApplicationProvider {
 		try {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
 					WILDFLY_ELYTRON_OIDC_CLIENT_KEYCLOAK_DEPLOYMENT,
+					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
+					.toPath();
+		} catch (SettingsBuildingException | ArtifactResolutionException e) {
+			throw new RuntimeException("Can not get artifact", e);
+		}
+		return file;
+	}
+
+	/**
+	 * Provides access to a WAR deployment containing the
+	 * {@code wildfly-web-cache-offload-infinispan} application
+	 *
+	 * @return {@link Path} instance that identifies the WAR artifact containing the
+	 *         {@code wildfly-web-cache-offload-infinispan} application.
+	 */
+	public static Path wildflyWebCacheOffloadInfinispanDeploymentPath() {
+		Path file = null;
+		try {
+			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
+					WILDFLY_WEB_CACHE_OFFLOAD_INFINISPAN_DEPLOYMENT,
 					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
 					.toPath();
 		} catch (SettingsBuildingException | ArtifactResolutionException e) {
