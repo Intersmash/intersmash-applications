@@ -38,7 +38,8 @@ public class EapBuildStreamTest {
 	void validateEapBuildProvisioningFile() {
 		final Stream<Path> provisionedServerPaths = Stream.of(
 				ApplicationProvider.wildflyElytronOidcClientKeycloakProvisionedServerPath(),
-				ApplicationProvider.wildflyWebCacheOffloadInfinispanProvisionedServerPath());
+				ApplicationProvider.wildflyWebCacheOffloadInfinispanProvisionedServerPath(),
+				ApplicationProvider.wildflyDistributedSessionsInfinispanProvisionedServerPath());
 
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path
