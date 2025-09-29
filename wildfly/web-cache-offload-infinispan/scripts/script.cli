@@ -1,0 +1,35 @@
+# Configure DEBUG logging for org.wildfly.clustering.web.infinispan
+/subsystem=logging/logger=org.wildfly.clustering.web.infinispan:add()
+/subsystem=logging/logger=org.wildfly.clustering.web.infinispan:write-attribute(name=level, value=DEBUG)
+/subsystem=logging/logger=org.wildfly.clustering.web.infinispan:add-handler(name=CONSOLE)
+
+# Configure DEBUG logging for org.infinispan.core
+/subsystem=logging/logger=org.infinispan.core:add()
+/subsystem=logging/logger=org.infinispan.core:write-attribute(name=level, value=DEBUG)
+/subsystem=logging/logger=org.infinispan.core:add-handler(name=CONSOLE)
+
+# Configure INFO logging for io.undertow.servlet.request and io.undertow.request
+/subsystem=logging/logger=io.undertow.servlet.request:add()
+/subsystem=logging/logger=io.undertow.servlet.request:write-attribute(name=level, value=INFO)
+/subsystem=logging/logger=io.undertow.servlet.request:add-handler(name=CONSOLE)
+/subsystem=logging/logger=io.undertow.request:add()
+/subsystem=logging/logger=io.undertow.request:write-attribute(name=level, value=INFO)
+/subsystem=logging/logger=io.undertow.request:add-handler(name=CONSOLE)
+
+batch
+    /socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=infinispan:add(host=${env.INFINISPAN_HOST}, port=${env.INFINISPAN_PORT})
+
+    # Configure a remote cache container
+    /subsystem=infinispan/remote-cache-container=infinispan-container:add(default-remote-cluster=data-grid-cluster)
+    /subsystem=infinispan/remote-cache-container=infinispan-container/remote-cluster=data-grid-cluster:add(socket-bindings=[infinispan])
+    /subsystem=infinispan/remote-cache-container=infinispan-container:write-attribute(name=properties, value={infinispan.client.hotrod.auth_realm=default,infinispan.client.hotrod.use_auth=true,infinispan.client.hotrod.auth_username=${env.CACHE_USERNAME},infinispan.client.hotrod.auth_password=${env.CACHE_PASSWORD},infinispan.client.hotrod.auth_server_name=${env.APP_NAME},infinispan.client.hotrod.sasl_properties.javax.security.sasl.qop=auth,infinispan.client.hotrod.sasl_mechanism=SCRAM-SHA-512,infinispan.client.hotrod.sni_host_name=${env.APP_NAME},infinispan.client.hotrod.ssl_hostname_validation=false,infinispan.client.hotrod.trust_store_path=/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt})
+
+    # Configure a remote we invalidation cache container which is connected via Hot Rod
+    /subsystem=infinispan/cache-container=web/invalidation-cache=infinispan-cache:add()
+    /subsystem=infinispan/cache-container=web/invalidation-cache=infinispan-cache/component=expiration:add(interval=0)
+    /subsystem=infinispan/cache-container=web/invalidation-cache=infinispan-cache/component=locking:add(isolation=REPEATABLE_READ)
+    /subsystem=infinispan/cache-container=web/invalidation-cache=infinispan-cache/component=transaction:add(mode=BATCH)
+    /subsystem=infinispan/cache-container=web/invalidation-cache=infinispan-cache/store=hotrod:add(remote-cache-container=infinispan-container,fetch-state=false,purge=false,passivation=false,shared=true)
+    /subsystem=infinispan/cache-container=web:write-attribute(name=default-cache,value=infinispan-cache)
+run-batch
+
