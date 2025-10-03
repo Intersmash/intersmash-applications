@@ -40,6 +40,8 @@
         <wildfly.ee-channel.groupId>org.wildfly.channels</wildfly.ee-channel.groupId>
         <wildfly.ee-channel.artifactId>wildfly-ee</wildfly.ee-channel.artifactId>
         <wildfly.ee-channel.version>${wildfly.version}</wildfly.ee-channel.version>
+        <!-- members servlet -->
+        <org.jgroups.version>5.4.11.Final</org.jgroups.version>
     </properties>
 
     <modules>
@@ -61,6 +63,13 @@
                 <version>${bom.wildfly-ee.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- /members servlet -->
+            <dependency>
+                <groupId>org.jgroups</groupId>
+                <artifactId>jgroups</artifactId>
+                <version>${org.jgroups.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -150,6 +159,7 @@
                 <module>microprofile-reactive-messaging-kafka</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
+                <module>distributed-sessions-infinispan</module>
             </modules>
         </profile>
         <profile>
@@ -175,6 +185,7 @@
             <modules>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
+                <module>distributed-sessions-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -256,6 +267,7 @@
                 <module>microprofile-reactive-messaging-kafka</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
+                <module>distributed-sessions-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -343,6 +355,7 @@
                 <module>microprofile-reactive-messaging-kafka</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
+                <module>distributed-sessions-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
