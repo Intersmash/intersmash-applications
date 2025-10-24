@@ -39,10 +39,40 @@ public class JmsTestConstants {
 	 * Response message template when a message is successfully sent to the MDB queue.
 	 * The actual queue name will be appended to this string.
 	 */
-	static final String QUEUE_MDB_SEND_RESPONSE = "Sent a text message with to ";
+	static final String QUEUE_MDB_SEND_RESPONSE = "Sent a text message for MDB to queue ";
 
 	/**
 	 * Default text content for test messages sent to be processed by the MDB.
 	 */
 	static final String QUEUE_MDB_TEXT_MESSAGE = "Hello MDB!";
+
+	/**
+	 * Name of the test queue used for basic JMS operations testing.
+	 */
+	public static final String TEST_QUEUE = "testQueue";
+
+	/**
+	 * Name of the input queue where messages are sent to be processed by the MDB.
+	 */
+	public static final String IN_QUEUE = "inQueue";
+
+	/**
+	 * Name of the output queue where the MDB sends reply messages after processing.
+	 */
+	public static final String OUT_QUEUE = "outQueue";
+
+	/**
+	 * Physical destination name for the test queue.
+	 */
+	public static final String TEST_DESTINATION = "test-queue";
+
+	/**
+	 * Physical destination name for the input queue.
+	 */
+	public static final String IN_DESTINATION = "in-queue";
+
+	/**
+	 * Physical destination name for the output queue.
+	 */
+	public static final String OUT_DESTINATION = "out-queue";
 }

@@ -43,7 +43,7 @@ import java.util.logging.Logger;
  * </p>
  */
 @MessageDriven(name = "testQueueMDB", activationConfig = {
-		@ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/inQueue"),
+		@ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/" + JmsTestConstants.IN_QUEUE),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "jakarta.jms.Queue"),
 		@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")
 })
@@ -74,7 +74,7 @@ public class JmsTestQueueMDB implements MessageListener {
 	/**
 	 * Output queue where reply messages are sent after processing incoming messages.
 	 */
-	@Resource(lookup = "java:/queue/outQueue")
+	@Resource(lookup = "java:/queue/" + JmsTestConstants.OUT_QUEUE)
 	private Queue outQueue;
 
 	/**
@@ -94,7 +94,7 @@ public class JmsTestQueueMDB implements MessageListener {
 	 * @see MessageListener#onMessage(Message)
 	 */
 	public void onMessage(Message rcvMessage) {
-		LOGGER.info("MDB: message received from inQueue");
+		LOGGER.info("MDB: message received from " + JmsTestConstants.IN_QUEUE);
 		TextMessage message;
 		try {
 			int processedMessages = numberOfProcessedMessages.incrementAndGet();

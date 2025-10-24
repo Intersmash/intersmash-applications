@@ -59,14 +59,20 @@ import java.util.logging.Logger;
  *   <li><b>outQueue</b> - Output queue where the MDB sends reply messages</li>
  * </ul>
  * </p>
+ * <p>NOTE: the <b>enable-amq1-prefix</b> is added in order to get rid of the legacy prefixes that would otherwise be
+ * added to the destinations names;
+ * see <a href="https://issues.redhat.com/browse/WFLY-13793">WFLY-13793</a> for context;</p>
  */
 @JMSDestinationDefinitions(value = {
-		@JMSDestinationDefinition(name = "java:/queue/testQueue", interfaceName = "jakarta.jms.Queue", destinationName = "test-queue", properties = {
-				"enable-amq1-prefix=false" }),
-		@JMSDestinationDefinition(name = "java:/queue/inQueue", interfaceName = "jakarta.jms.Queue", destinationName = "in-queue", properties = {
-				"enable-amq1-prefix=false" }),
-		@JMSDestinationDefinition(name = "java:/queue/outQueue", interfaceName = "jakarta.jms.Queue", destinationName = "out-queue", properties = {
-				"enable-amq1-prefix=false" })
+		@JMSDestinationDefinition(name = "java:/queue/"
+				+ JmsTestConstants.TEST_QUEUE, interfaceName = "jakarta.jms.Queue", destinationName = JmsTestConstants.TEST_DESTINATION, properties = {
+						"enable-amq1-prefix=false" }),
+		@JMSDestinationDefinition(name = "java:/queue/"
+				+ JmsTestConstants.IN_QUEUE, interfaceName = "jakarta.jms.Queue", destinationName = JmsTestConstants.IN_DESTINATION, properties = {
+						"enable-amq1-prefix=false" }),
+		@JMSDestinationDefinition(name = "java:/queue/"
+				+ JmsTestConstants.OUT_QUEUE, interfaceName = "jakarta.jms.Queue", destinationName = JmsTestConstants.OUT_DESTINATION, properties = {
+						"enable-amq1-prefix=false" })
 })
 @WebServlet("/jms-test")
 public class JmsTestServlet extends HttpServlet {
@@ -79,19 +85,19 @@ public class JmsTestServlet extends HttpServlet {
 	/**
 	 * General purpose test queue for direct message send/receive operations.
 	 */
-	@Resource(lookup = "java:/queue/testQueue")
+	@Resource(lookup = "java:/queue/" + JmsTestConstants.TEST_QUEUE)
 	private Queue testQueue;
 
 	/**
 	 * Input queue consumed by the message-driven bean (MDB).
 	 */
-	@Resource(lookup = "java:/queue/inQueue")
+	@Resource(lookup = "java:/queue/" + JmsTestConstants.IN_QUEUE)
 	private Queue inQueue;
 
 	/**
 	 * Output queue where the MDB sends reply messages after processing.
 	 */
-	@Resource(lookup = "java:/queue/outQueue")
+	@Resource(lookup = "java:/queue/" + JmsTestConstants.OUT_QUEUE)
 	private Queue outQueue;
 
 	/**
@@ -101,7 +107,8 @@ public class JmsTestServlet extends HttpServlet {
 	private JMSContext jmsContext;
 
 	/**
-	 * Connection factory for creating JMS connections when transactional sessions are needed.
+	 * Connection factory for creating JMS connections when transactional sessions are needed.<br>
+	 * The <b>DefaultJMSConnectionFactory</b> is automatically configured by the <b>remote-activemq</b> layer.
 	 */
 	@Resource(lookup = "java:jboss/DefaultJMSConnectionFactory")
 	private ConnectionFactory connectionFactory;
@@ -146,7 +153,7 @@ public class JmsTestServlet extends HttpServlet {
 					jmsContext.createProducer().send(testQueue, textMessage);
 					out.println(JmsTestConstants.QUEUE_SEND_RESPONSE + testQueue.toString());
 					break;
-				// produce and send a text message to testQueue
+				// produce and send a text message to inQueue
 				case REQUEST_SEND_REQUEST_MESSAGE_FOR_MDB:
 					textMessage = jmsContext.createTextMessage(JmsTestConstants.QUEUE_MDB_TEXT_MESSAGE);
 					jmsContext.createProducer().send(inQueue, textMessage);
@@ -240,10 +247,10 @@ public class JmsTestServlet extends HttpServlet {
 				+ "</b> parameter to consume a message from test queue</li>" +
 				"<li>use <b>?request=" + JmsTestRequestType.REQUEST_CONSUME_REPLY_MESSAGE_FOR_MDB.value()
 				+ "</b> parameter to consume a reply " +
-				"message from outQueue queue which was processed by MDB</li>" +
+				"message from " + JmsTestConstants.OUT_QUEUE + " queue which was processed by MDB</li>" +
 				"<li>use <b>?request=" + JmsTestRequestType.REQUEST_CONSUME_ALL_REPLY_MESSAGES_FOR_MDB.value()
 				+ "</b> parameter to consume all reply " +
-				"messages from outQueue queue which were processed by MDB</li>" +
+				"messages from " + JmsTestConstants.OUT_QUEUE + " queue which were processed by MDB</li>" +
 				"</ul>");
 	}
 }
