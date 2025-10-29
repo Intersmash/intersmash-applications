@@ -31,6 +31,7 @@ public class ApplicationProvider {
 	static final String WILDFLY_ELYTRON_OIDC_CLIENT_KEYCLOAK_DEPLOYMENT = "wildfly-elytron-oidc-client-keycloak";
 	static final String WILDFLY_WEB_CACHE_OFFLOAD_INFINISPAN_DEPLOYMENT = "wildfly-web-cache-offload-infinispan";
 	static final String WILDFLY_DISTRIBUTED_SESSIONS_INFINISPAN_DEPLOYMENT = "wildfly-distributed-sessions-infinispan";
+	static final String WILDFLY_ACTIVEMQ_ARTEMIS_BROKER_SSL_DEPLOYMENT = "wildfly-activemq-artemis-ssl";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR = "war";
 
 	/**
@@ -48,13 +49,25 @@ public class ApplicationProvider {
 	/**
 	 * Provides access to a filesystem directory containing a server provisioned by
 	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
-	 * {@code wildfly-elytron-oidc-client-keycloak} application
+	 * {@code wildfly-distributed-sessions-infinispan} application
 	 *
 	 * @return {@link Path} instance that identifies the directory containing the
 	 *         WildFly/JBoss EAP 8.x provisioned server.
 	 */
 	public static Path wildflyDistributedSessionsInfinispanProvisionedServerPath() {
 		return findApplicationDirectory("wildfly", "distributed-sessions-infinispan", "target", "server");
+	}
+
+	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code wildfly-activemq-artemis-ssl} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyActiveMQArtemisSslProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "activemq-artemis-ssl", "target", "server");
 	}
 
 	/**
@@ -153,6 +166,26 @@ public class ApplicationProvider {
 		try {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
 					WILDFLY_DISTRIBUTED_SESSIONS_INFINISPAN_DEPLOYMENT,
+					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
+					.toPath();
+		} catch (SettingsBuildingException | ArtifactResolutionException e) {
+			throw new RuntimeException("Can not get artifact", e);
+		}
+		return file;
+	}
+
+	/**
+	 * Provides access to a WAR deployment containing the
+	 * {@code wildfly-activemq-artemis-ssl} application
+	 *
+	 * @return {@link Path} instance that identifies the WAR artifact containing the
+	 *         {@code wildfly-activemq-artemis-ssl} application.
+	 */
+	public static Path wildflyActiveMQArtemisSslDeploymentPath() {
+		Path file = null;
+		try {
+			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
+					WILDFLY_ACTIVEMQ_ARTEMIS_BROKER_SSL_DEPLOYMENT,
 					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
 					.toPath();
 		} catch (SettingsBuildingException | ArtifactResolutionException e) {

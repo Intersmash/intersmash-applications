@@ -160,6 +160,7 @@
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
+                <module>activemq-artemis-ssl</module>
             </modules>
         </profile>
         <profile>
@@ -186,6 +187,7 @@
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
+                <module>activemq-artemis-ssl</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -268,6 +270,7 @@
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
+                <module>activemq-artemis-ssl</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -356,6 +359,7 @@
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
+                <module>activemq-artemis-ssl</module>
             </modules>
             <build>
                 <pluginManagement>
