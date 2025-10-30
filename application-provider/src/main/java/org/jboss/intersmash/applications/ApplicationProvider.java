@@ -32,6 +32,7 @@ public class ApplicationProvider {
 	static final String WILDFLY_WEB_CACHE_OFFLOAD_INFINISPAN_DEPLOYMENT = "wildfly-web-cache-offload-infinispan";
 	static final String WILDFLY_DISTRIBUTED_SESSIONS_INFINISPAN_DEPLOYMENT = "wildfly-distributed-sessions-infinispan";
 	static final String WILDFLY_ACTIVEMQ_ARTEMIS_BROKER_SSL_DEPLOYMENT = "wildfly-activemq-artemis-ssl";
+	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_DEPLOYMENT = "wildfly-keycloak-saml-adapter";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR = "war";
 
 	/**
@@ -68,6 +69,18 @@ public class ApplicationProvider {
 	 */
 	public static Path wildflyActiveMQArtemisSslProvisionedServerPath() {
 		return findApplicationDirectory("wildfly", "activemq-artemis-ssl", "target", "server");
+	}
+
+	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code wildfly-keycloak-saml-adapter} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyKeycloakSamlAdapterProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "keycloak-saml-adapter", "target", "server");
 	}
 
 	/**
@@ -186,6 +199,26 @@ public class ApplicationProvider {
 		try {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
 					WILDFLY_ACTIVEMQ_ARTEMIS_BROKER_SSL_DEPLOYMENT,
+					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
+					.toPath();
+		} catch (SettingsBuildingException | ArtifactResolutionException e) {
+			throw new RuntimeException("Can not get artifact", e);
+		}
+		return file;
+	}
+
+	/**
+	 * Provides access to a WAR deployment containing the
+	 * {@code wildfly-keycloak-saml-adapter} application
+	 *
+	 * @return {@link Path} instance that identifies the WAR artifact containing the
+	 *         {@code wildfly-keycloak-saml-adapter} application.
+	 */
+	public static Path wildflyKeycloakSamlAdapterDeploymentPath() {
+		Path file = null;
+		try {
+			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
+					WILDFLY_KEYCLOAK_SAML_ADAPTER_DEPLOYMENT,
 					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
 					.toPath();
 		} catch (SettingsBuildingException | ArtifactResolutionException e) {
