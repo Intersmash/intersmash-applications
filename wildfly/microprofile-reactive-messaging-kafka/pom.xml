@@ -13,7 +13,7 @@
     <name>Intersmash Applications :: WildFly :: MicroProfile Reactive Messaging + Kafka</name>
 
     <properties>
-        <version.org.apache.kafka.kafka-clients>3.7.1</version.org.apache.kafka.kafka-clients>
+        <version.org.apache.kafka.kafka-clients>4.0.0.redhat-00013</version.org.apache.kafka.kafka-clients>
         <version.microprofile-reactive-messaging-api>2.0.1</version.microprofile-reactive-messaging-api>
         <version.microprofile-reactive-streams-operators-api>1.0.1</version.microprofile-reactive-streams-operators-api>
         <version.smallrye-reactive-messaging-kafka-api>3.18.0</version.smallrye-reactive-messaging-kafka-api>
