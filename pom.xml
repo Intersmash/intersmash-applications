@@ -50,7 +50,7 @@
         <version.maven-resolver>2.0.7</version.maven-resolver>
         <version.maven-aether-provider>3.3.9</version.maven-aether-provider>
         <version.templating-maven-plugin>3.0.0</version.templating-maven-plugin>
-        <version.spotless-maven-plugin>2.46.1</version.spotless-maven-plugin>
+        <version.spotless-maven-plugin>3.0.0</version.spotless-maven-plugin>
         <version.junit-jupiter>5.11.3</version.junit-jupiter>
         <version.mockito>5.15.2</version.mockito>
         <version.maven-surefire-plugin>3.5.2</version.maven-surefire-plugin>
