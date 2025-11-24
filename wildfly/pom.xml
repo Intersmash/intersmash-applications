@@ -42,6 +42,13 @@
         <wildfly.ee-channel.version>${wildfly.version}</wildfly.ee-channel.version>
         <!-- members servlet -->
         <org.jgroups.version>5.4.11.Final</org.jgroups.version>
+        <!-- Keycloak SAML -->
+        <keycloak.version>26.4.5</keycloak.version>
+        <keycloak-saml-adapter-galleon-pack.groupId>org.keycloak</keycloak-saml-adapter-galleon-pack.groupId>
+        <keycloak-saml-adapter-galleon-pack.artifactId>keycloak-saml-adapter-galleon-pack</keycloak-saml-adapter-galleon-pack.artifactId>
+        <keycloak-saml-adapter-galleon-pack.version>${keycloak.version}</keycloak-saml-adapter-galleon-pack.version>
+        <!-- jslt library -->
+        <org.glassfish.web.version>3.0.1</org.glassfish.web.version>
     </properties>
 
     <modules>
@@ -70,6 +77,11 @@
                 <artifactId>jgroups</artifactId>
                 <version>${org.jgroups.version}</version>
                 <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+                <version>${org.glassfish.web.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -161,6 +173,7 @@
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
                 <module>activemq-artemis-ssl</module>
+                <module>keycloak-saml-adapter</module>
             </modules>
         </profile>
         <profile>
@@ -182,12 +195,16 @@
                 <wildfly.ee-channel.groupId>org.jboss.eap.channels</wildfly.ee-channel.groupId>
                 <wildfly.ee-channel.artifactId>eap-8.1</wildfly.ee-channel.artifactId>
                 <wildfly.ee-channel.version>1.0.0.Beta-redhat-00023</wildfly.ee-channel.version>
+                <!-- Keycloak SAML -->
+                <keycloak.version>26.2.4.redhat-00013</keycloak.version>
+                <keycloak-saml-adapter-galleon-pack.version>26.4.4.redhat-00001</keycloak-saml-adapter-galleon-pack.version>
             </properties>
             <modules>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
                 <module>activemq-artemis-ssl</module>
+                <module>keycloak-saml-adapter</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -261,6 +278,9 @@
                 <wildfly.xp-channel.groupId>org.jboss.eap.channels</wildfly.xp-channel.groupId>
                 <wildfly.xp-channel.artifactId>eap-xp-5.0</wildfly.xp-channel.artifactId>
                 <wildfly.xp-channel.version>1.1.0.GA-redhat-00001</wildfly.xp-channel.version>
+                <!-- Keycloak SAML -->
+                <keycloak.version>26.2.4.redhat-00013</keycloak.version>
+                <keycloak-saml-adapter-galleon-pack.version>26.4.4.redhat-00001</keycloak-saml-adapter-galleon-pack.version>
             </properties>
             <!--
                 The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
@@ -271,6 +291,7 @@
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
                 <module>activemq-artemis-ssl</module>
+                <module>keycloak-saml-adapter</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -350,6 +371,9 @@
                 <wildfly.ee-channel.groupId>org.jboss.eap.channels</wildfly.ee-channel.groupId>
                 <wildfly.ee-channel.artifactId>custom-artifact-ID</wildfly.ee-channel.artifactId>
                 <wildfly.ee-channel.version>CUSTOM_VERSION</wildfly.ee-channel.version>
+                <!-- Keycloak SAML -->
+                <keycloak.version>26.2.4.redhat-00013</keycloak.version>
+                <keycloak-saml-adapter-galleon-pack.version>26.4.4.redhat-00001</keycloak-saml-adapter-galleon-pack.version>
             </properties>
             <!--
                 The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
@@ -360,6 +384,7 @@
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
                 <module>activemq-artemis-ssl</module>
+                <module>keycloak-saml-adapter</module>
             </modules>
             <build>
                 <pluginManagement>
