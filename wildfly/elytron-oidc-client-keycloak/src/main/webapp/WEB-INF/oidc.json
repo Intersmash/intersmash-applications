@@ -5,6 +5,6 @@
     "ssl-required" : "external",
     "disable-trust-manager": "true",
     "credentials": {
-        "secret": "password"
+        "secret": "${env.OIDC_SECURE_DEPLOYMENT_SECRET}"
     }
 }
