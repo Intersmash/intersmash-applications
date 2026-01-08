@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.jboss.intersmash.applications</groupId>
+        <artifactId>intersmash-applications-wildfly</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>wildfly-keycloak-saml-adapter-ejb</artifactId>
+    <packaging>war</packaging>
+    <name>Intersmash Applications :: WildFly + EJB :: SAML Adapter + Keycloak </name>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-core</artifactId>
+            <version>${keycloak.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-saml-adapter-core</artifactId>
+            <version>${keycloak.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-adapter-spi</artifactId>
+            <version>${keycloak.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-saml-adapter-api-public</artifactId>
+            <version>${keycloak.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-common</artifactId>
+            <version>${keycloak.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.ejb</groupId>
+            <artifactId>jakarta.ejb-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>${wildfly-maven-plugin.groupId}</groupId>
+                <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
+                <!-- Use configuration from parent and append specific configuration for project - layers, cli,...-->
+                <configuration>
+                    <feature-packs combine.children="append">
+                        <feature-pack>
+                            <groupId>${keycloak-saml-adapter-galleon-pack.groupId}</groupId>
+                            <artifactId>${keycloak-saml-adapter-galleon-pack.artifactId}</artifactId>
+                            <version>${keycloak-saml-adapter-galleon-pack.version}</version>
+                        </feature-pack>
+                    </feature-packs>
+                    <layers combine.children="append">
+                        <!--
+                            This layer adds the SAML adapter and dependencies to the modules directory;
+                            NOTE: the keycloak-saml subsystem configuration, will be performed by the
+                            keycloak-saml-adapter-galleon-pack as part of the startup process
+                        -->
+                        <layer>keycloak-saml</layer>
+                    </layers>
+                    <packaging-scripts>
+                        <!-- Commands and scripts are executed in the context of an embedded-server.
+                        You don't need to start and stop the embedded-server. -->
+                        <execution>
+                            <!-- List of commands -->
+                            <commands>
+                                <command>/subsystem=logging/logger=org.wildfly.security:add(level=DEBUG)</command>
+                                <command>/subsystem=logging/logger=org.keycloak:add(level=DEBUG)</command>
+                                <!--
+                                <command>/subsystem=jgroups/stack=tcp/protocol=PING:add(add-index=1)</command>
+                                <command>/subsystem=ejb3/service=timer-service:add(default-persistent-timer-management=transient, default-transient-timer-management=transient)</command>
+                                -->
+                            </commands>
+                        </execution>
+                    </packaging-scripts>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

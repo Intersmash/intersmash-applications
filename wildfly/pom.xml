@@ -174,6 +174,7 @@
                 <module>distributed-sessions-infinispan</module>
                 <module>activemq-artemis-ssl</module>
                 <module>keycloak-saml-adapter</module>
+                <module>keycloak-saml-adapter-ejb</module>
             </modules>
         </profile>
         <profile>
@@ -205,6 +206,7 @@
                 <module>distributed-sessions-infinispan</module>
                 <module>activemq-artemis-ssl</module>
                 <module>keycloak-saml-adapter</module>
+                <module>keycloak-saml-adapter-ejb</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -292,6 +294,7 @@
                 <module>distributed-sessions-infinispan</module>
                 <module>activemq-artemis-ssl</module>
                 <module>keycloak-saml-adapter</module>
+                <module>keycloak-saml-adapter-ejb</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -385,6 +388,7 @@
                 <module>distributed-sessions-infinispan</module>
                 <module>activemq-artemis-ssl</module>
                 <module>keycloak-saml-adapter</module>
+                <module>keycloak-saml-adapter-ejb</module>
             </modules>
             <build>
                 <pluginManagement>
