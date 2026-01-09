@@ -175,6 +175,7 @@
                 <module>activemq-artemis-ssl</module>
                 <module>keycloak-saml-adapter</module>
                 <module>keycloak-saml-adapter-ejb</module>
+                <module>keycloak-saml-adapter-ejb-bootable-jar</module>
             </modules>
         </profile>
         <profile>
@@ -295,6 +296,7 @@
                 <module>activemq-artemis-ssl</module>
                 <module>keycloak-saml-adapter</module>
                 <module>keycloak-saml-adapter-ejb</module>
+                <module>keycloak-saml-adapter-ejb-bootable-jar</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -389,6 +391,7 @@
                 <module>activemq-artemis-ssl</module>
                 <module>keycloak-saml-adapter</module>
                 <module>keycloak-saml-adapter-ejb</module>
+                <module>keycloak-saml-adapter-ejb-bootable-jar</module>
             </modules>
             <build>
                 <pluginManagement>
