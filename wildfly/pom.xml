@@ -176,6 +176,7 @@
                 <module>keycloak-saml-adapter</module>
                 <module>keycloak-saml-adapter-ejb</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
+                <module>elytron-oidc-client-keycloak-bootable-jar</module>
             </modules>
         </profile>
         <profile>
@@ -265,7 +266,7 @@
                 <!-- WildFly/JBoss EAP Maven Plugin coordinates -->
                 <wildfly-maven-plugin.groupId>org.jboss.eap.plugins</wildfly-maven-plugin.groupId>
                 <wildfly-maven-plugin.artifactId>eap-maven-plugin</wildfly-maven-plugin.artifactId>
-                <wildfly-maven-plugin.version>1.0.0.Final-redhat-00014</wildfly-maven-plugin.version>
+                <wildfly-maven-plugin.version>2.0.1.Final-redhat-00006</wildfly-maven-plugin.version>
                 <!-- Default JBoss EAP XP `microprofile` BOM version is set here and can be overridden for pulling the right BOM -->
                 <bom.wildfly-microprofile.groupId>org.jboss.bom</bom.wildfly-microprofile.groupId>
                 <bom.wildfly-microprofile.artifactId>jboss-eap-xp-microprofile</bom.wildfly-microprofile.artifactId>
@@ -297,6 +298,7 @@
                 <module>keycloak-saml-adapter</module>
                 <module>keycloak-saml-adapter-ejb</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
+                <module>elytron-oidc-client-keycloak-bootable-jar</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -364,7 +366,7 @@
             <properties>
                 <wildfly-maven-plugin.groupId>org.jboss.eap.plugins</wildfly-maven-plugin.groupId>
                 <wildfly-maven-plugin.artifactId>eap-maven-plugin</wildfly-maven-plugin.artifactId>
-                <wildfly-maven-plugin.version>1.0.0.Final-redhat-00014</wildfly-maven-plugin.version>
+                <wildfly-maven-plugin.version>2.0.1.Final-redhat-00006</wildfly-maven-plugin.version>
                 <!-- Default JBoss EAP XP `microprofile` BOM version is set here and can be overridden for pulling the right BOM -->
                 <bom.wildfly-microprofile.groupId>org.jboss.bom</bom.wildfly-microprofile.groupId>
                 <bom.wildfly-microprofile.artifactId>jboss-eap-xp-microprofile</bom.wildfly-microprofile.artifactId>
@@ -392,6 +394,7 @@
                 <module>keycloak-saml-adapter</module>
                 <module>keycloak-saml-adapter-ejb</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
+                <module>elytron-oidc-client-keycloak-bootable-jar</module>
             </modules>
             <build>
                 <pluginManagement>
