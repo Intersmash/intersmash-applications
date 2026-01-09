@@ -1,0 +1,21 @@
+/subsystem=keycloak-saml/secure-deployment=ROOT.war/:add
+
+/subsystem=keycloak-saml/secure-deployment=ROOT.war/SP=keycloak-saml-adapter:add(sslPolicy=EXTERNAL,logoutPage="${env.TEST_WILDFLY_ROUTE}")
+
+/subsystem=keycloak-saml/secure-deployment=ROOT.war/SP=keycloak-saml-adapter/IDP=idp/:add( \
+    SingleSignOnService={ \
+        signRequest=false, \
+        validateResponseSignature=false, \
+        validateAssertionSignature=false, \
+        requestBinding=POST, \
+        bindingUrl=${env.TEST_KEYCLOAK_ROUTE}/realms/${env.TEST_KEYCLOAK_REALM}/protocol/saml}, \
+    SingleLogoutService={ \
+        signRequest=false, \
+        signResponse=false, \
+        validateRequestSignature=false, \
+        validateResponseSignature=false, \
+        requestBinding=POST, \
+        responseBinding=POST, \
+        postBindingUrl=${env.TEST_KEYCLOAK_ROUTE}/realms/${env.TEST_KEYCLOAK_REALM}/protocol/saml, \
+        redirectBindingUrl=${env.TEST_KEYCLOAK_ROUTE}/auth/realms/${env.TEST_KEYCLOAK_REALM}/protocol/saml} \
+)
