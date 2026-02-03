@@ -262,6 +262,21 @@ class ApplicationProviderTest {
 		assertPathExist(appPath);
 	}
 
+	/**
+	 * Verify that a BOOTABLE JAR deployment for the
+	 * {@code wildfly-elytron-oidc-client-keycloak-bootable-jar} application exists.
+	 */
+	@Test
+	void wildflyElytronOidcClientKeycloakBootableJarDeploymentPath_exists() {
+		Path appPath = null;
+		try {
+			appPath = ApplicationProvider.wildflyElytronOidcClientKeycloakBootableJarDeploymentPath();
+		} catch (Throwable e) {
+			Assertions.fail(e);
+		}
+		assertPathExist(appPath);
+	}
+
 	private static void assertPathExist(final Path path) {
 		Assertions.assertNotNull(path);
 		Assertions.assertTrue(Files.exists(path));
