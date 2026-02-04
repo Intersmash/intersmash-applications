@@ -1,0 +1,12 @@
+/subsystem=messaging-activemq/pooled-connection-factory=activemq-ra:write-attribute(name=user,value="${env.ARTEMIS_USER}")
+/subsystem=messaging-activemq/pooled-connection-factory=activemq-ra:write-attribute(name=password,value="${env.ARTEMIS_PASSWORD}")
+/subsystem=messaging-activemq/remote-connector=artemis:map-put(name=params, key=ssl-enabled, value=true)
+/subsystem=messaging-activemq/remote-connector=artemis:map-put(name=params, key=trustStorePath, value="${env.TRUST_STORE_FILENAME}")
+/subsystem=messaging-activemq/remote-connector=artemis:map-put(name=params, key=trustStorePassword, value="${env.TRUSTSTORE_PASSWORD}")
+/subsystem=messaging-activemq/remote-connector=artemis:map-put(name=params, key=verify-host, value=false)
+# https://access.redhat.com/solutions/3078171
+/subsystem=jgroups/stack=tcp/protocol=PING:add(add-index=1)
+# required for Session Mode SESSION_TRANSACTED
+/subsystem=messaging-activemq/pooled-connection-factory=activemq-ra:write-attribute(name=allow-local-transactions, value=true)
+# Use XA Transactions
+/subsystem=messaging-activemq/pooled-connection-factory=activemq-ra:write-attribute(name=transaction, value=xa)
