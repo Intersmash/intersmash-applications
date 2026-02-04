@@ -1,0 +1,23 @@
+# This is the queue that gets forwarded to AMQ
+/subsystem=messaging-activemq/server=default/jms-queue=jmsBridgeSourceQueue:add(entries=[queue/jmsBridgeSourceQueue jms/queue/jmsBridgeSourceQueue java:jboss/exported/jms/queue/jmsBridgeSourceQueue])
+
+/subsystem=messaging-activemq/jms-bridge=my-jms-bridge:add( \
+    quality-of-service=AT_MOST_ONCE, \
+    module=org.apache.activemq.artemis, \
+    failure-retry-interval=500, \
+    max-retries=-1, \
+    max-batch-size=10, \
+    max-batch-time=100, \
+    source-connection-factory=ConnectionFactory, \
+    source-destination=jms/queue/jmsBridgeSourceQueue, \
+    source-context={}, \
+    target-connection-factory=ConnectionFactory, \
+    target-destination="${env.ARTEMIS_QUEUE}", \
+    target-user="${env.ARTEMIS_USER}", \
+    target-password="${env.ARTEMIS_PASSWORD}", \
+    target-context={ \
+        java.naming.factory.initial=org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory, \
+        java.naming.provider.url=tcp://${jboss.messaging.connector.host}:${jboss.messaging.connector.port}, \
+        queue.${env.ARTEMIS_QUEUE}=${env.ARTEMIS_QUEUE} \
+    } \
+)
