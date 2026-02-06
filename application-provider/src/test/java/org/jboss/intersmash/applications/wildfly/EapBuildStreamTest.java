@@ -39,7 +39,10 @@ public class EapBuildStreamTest {
 		final Stream<Path> provisionedServerPaths = Stream.of(
 				ApplicationProvider.wildflyElytronOidcClientKeycloakProvisionedServerPath(),
 				ApplicationProvider.wildflyWebCacheOffloadInfinispanProvisionedServerPath(),
-				ApplicationProvider.wildflyDistributedSessionsInfinispanProvisionedServerPath());
+				ApplicationProvider.wildflyDistributedSessionsInfinispanProvisionedServerPath(),
+				ApplicationProvider.wildflyActiveMQArtemisSslProvisionedServerPath(),
+				ApplicationProvider.wildflyKeycloakSamlAdapterProvisionedServerPath(),
+				ApplicationProvider.wildflyKeycloakSamlAdapterEjbProvisionedServerPath());
 
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path
