@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.jboss.intersmash.applications</groupId>
+        <artifactId>intersmash-applications-wildfly</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>wildfly-keycloak-saml-adapter-ejb-bootable-jar</artifactId>
+    <packaging>war</packaging>
+    <name>Intersmash Applications :: WildFly Bootable Jar + EJB :: SAML Adapter + Keycloak </name>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.ejb</groupId>
+            <artifactId>jakarta.ejb-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>${wildfly-maven-plugin.groupId}</groupId>
+                <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
+                <version>${wildfly-maven-plugin.version}</version>
+                <!-- Use configuration from parent and append specific configuration for project - layers, cli,...-->
+                <configuration>
+                    <feature-packs combine.children="append">
+                        <feature-pack>
+                            <groupId>${keycloak-saml-adapter-galleon-pack.groupId}</groupId>
+                            <artifactId>${keycloak-saml-adapter-galleon-pack.artifactId}</artifactId>
+                            <version>${keycloak-saml-adapter-galleon-pack.version}</version>
+                        </feature-pack>
+                    </feature-packs>
+                    <layers>
+                        <layer>web-server</layer>
+                        <layer>keycloak-client-saml-ejb</layer>
+                        <layer>logging</layer>
+                    </layers>
+                    <packaging-scripts>
+                        <!-- Commands and scripts are executed in the context of an embedded-server.
+                        You don't need to start and stop the embedded-server. -->
+                        <execution>
+                            <!-- List of commands -->
+                            <commands>
+                                <command>/subsystem=logging/logger=org.wildfly.security:add(level=DEBUG)</command>
+                                <command>/subsystem=logging/logger=org.keycloak:add(level=DEBUG)</command>
+                            </commands>
+                            <scripts>
+                                <script>./scripts/keycloak-saml.cli</script>
+                                <script>./scripts/management.cli</script>
+                            </scripts>
+                        </execution>
+                    </packaging-scripts>
+                    <bootable-jar>true</bootable-jar>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>wildfly-target-distribution.jboss-eap-xp</id>
+            <properties>
+                <wildfly-maven-plugin.version>2.0.0.Beta1-redhat-00011</wildfly-maven-plugin.version>
+            </properties>
+        </profile>
+    </profiles>
+</project>
