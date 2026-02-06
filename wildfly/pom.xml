@@ -21,7 +21,7 @@
         <wildfly-maven-plugin.artifactId>wildfly-maven-plugin</wildfly-maven-plugin.artifactId>
         <wildfly-maven-plugin.version>5.1.3.Final</wildfly-maven-plugin.version>
         <!-- Default WildFly/JBoss EAP stream version -->
-        <wildfly.version>38.0.0.Final</wildfly.version>
+        <wildfly.version>38.0.1.Final</wildfly.version>
         <!-- Default WildFly/JBoss EAP `ee` BOMs version is set here and can be overridden for pulling the right BOM -->
         <bom.wildfly-ee.groupId>org.wildfly.bom</bom.wildfly-ee.groupId>
         <bom.wildfly-ee.artifactId>wildfly-ee</bom.wildfly-ee.artifactId>
