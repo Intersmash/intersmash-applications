@@ -6,3 +6,7 @@
 /style-config/target/
 /wildfly/elytron-oidc-client-keycloak/target/
 /wildfly/web-cache-offload-infinispan/target/
+/wildfly/activemq-artemis-ssl/target/
+/wildfly/distributed-sessions-infinispan/target/
+/wildfly/keycloak-saml-adapter/target/
+/wildfly/keycloak-saml-adapter-ejb/target/

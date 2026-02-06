@@ -39,7 +39,11 @@ public class EapXpBuildStreamTest {
 		final Stream<Path> provisionedServerPaths = Stream.of(
 				ApplicationProvider.wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath(),
 				ApplicationProvider.wildflyElytronOidcClientKeycloakProvisionedServerPath(),
-				ApplicationProvider.wildflyWebCacheOffloadInfinispanProvisionedServerPath());
+				ApplicationProvider.wildflyWebCacheOffloadInfinispanProvisionedServerPath(),
+				ApplicationProvider.wildflyDistributedSessionsInfinispanProvisionedServerPath(),
+				ApplicationProvider.wildflyActiveMQArtemisSslProvisionedServerPath(),
+				ApplicationProvider.wildflyKeycloakSamlAdapterProvisionedServerPath(),
+				ApplicationProvider.wildflyKeycloakSamlAdapterEjbProvisionedServerPath());
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path
 					.of(path + "/.wildfly-maven-plugin-provisioning.xml");
