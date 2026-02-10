@@ -1,0 +1,2 @@
+# Log Infinispan subsystem to TRACE, to monitor potential issues
+/subsystem=logging/logger=org.infinispan:add(level=TRACE)
