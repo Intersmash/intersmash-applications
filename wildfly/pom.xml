@@ -212,7 +212,6 @@
                 <module>activemq-artemis-ssl</module>
                 <module>keycloak-saml-adapter</module>
                 <module>keycloak-saml-adapter-ejb</module>
-                <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>timer-expiration-store</module>
             </modules>
             <build>
