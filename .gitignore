@@ -16,3 +16,7 @@ wildfly/keycloak-saml-adapter-ejb-bootable-jar/target
 /wildfly/timer-expiration-store/target/
 /wildfly/keycloak-saml-adapter-ejb-bootable-jar/target/
 /wildfly/distributed-timers-infinispan/target/
+wildfly/activemq-artemis-connector/target/
+wildfly/activemq-artemis-jms-bridge/target/
+wildfly/elytron-oidc-client-keycloak-bootable-jar/target/
+wildfly/kafka-sasl-application/target/

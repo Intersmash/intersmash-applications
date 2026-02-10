@@ -20,9 +20,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.jboss.intersmash.applications.wildfly.distributed.timers.config.Config;
-import org.jboss.intersmash.applications.wildfly.distributed.timers.expiration.MonitoredTimerExpiration;
-import org.jboss.intersmash.applications.wildfly.distributed.timers.expiration.TimerExpiration;
-import org.jboss.intersmash.applications.wildfly.distributed.timers.expiration.TimerExpirationStore;
+import org.jboss.intersmash.applications.wildfly.timer.expiration.store.MonitoredTimerExpiration;
+import org.jboss.intersmash.applications.wildfly.timer.expiration.store.TimerExpiration;
+import org.jboss.intersmash.applications.wildfly.timer.expiration.store.TimerExpirationStore;
 
 @Stateless
 public class TransactionalRecurringTimerService {
@@ -124,7 +124,7 @@ public class TransactionalRecurringTimerService {
 					now);
 			// save the new timer expiration data
 			LOGGER.info("--->>> Sending timer expiration data to service: " + timerExpiration);
-			MonitoredTimerExpiration created = timerExpirationStoreProxy.createTimerExpiration(timerExpiration);
+			MonitoredTimerExpiration created = timerExpirationStoreProxy.create(timerExpiration);
 			// read the newly created timer expiration data to output some log messages
 			LOGGER.info("<<<--- Got timer expiration back from service: " + created.toString());
 		} catch (UnknownHostException e) {
@@ -133,7 +133,7 @@ public class TransactionalRecurringTimerService {
 	}
 
 	private static TimerExpirationStore getTimerExpirationStoreProxy(InitialContext context) throws NamingException {
-		String lookupName = "ejb:/ROOT/TimerExpirationStoreImpl!org.jboss.intersmash.applications.wildfly.distributed.timers.expiration.TimerExpirationStore";
+		String lookupName = "ejb:/ROOT/TimerExpirationStoreImpl!org.jboss.intersmash.applications.wildfly.timer.expiration.store.TimerExpirationStore";
 		return (TimerExpirationStore) context.lookup(lookupName);
 	}
 

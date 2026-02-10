@@ -49,7 +49,9 @@ public class EapXpBuildStreamTest {
 				ApplicationProvider.wildflyKafkaApplicationProvisionedServerPath(),
 				ApplicationProvider.wildflyKafkaSaslApplicationProvisionedServerPath(),
 				ApplicationProvider.wildflyElytronOidcClientKeycloakBootableJarProvisionedServerPath(),
-				ApplicationProvider.wildflyKeycloakSamlAdapterEjbBootableJarProvisionedServerPath());
+				ApplicationProvider.wildflyKeycloakSamlAdapterEjbBootableJarProvisionedServerPath(),
+				ApplicationProvider.wildflyTimerExpirationStoreProvisionedServerPath(),
+				ApplicationProvider.wildflyDistributedTimersInfinispanProvisionedServerPath());
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path
 					.of(path + "/.wildfly-maven-plugin-provisioning.xml");
