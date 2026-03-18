@@ -21,7 +21,7 @@
         <wildfly-maven-plugin.artifactId>wildfly-maven-plugin</wildfly-maven-plugin.artifactId>
         <wildfly-maven-plugin.version>5.1.3.Final</wildfly-maven-plugin.version>
         <!-- Default WildFly/JBoss EAP stream version -->
-        <wildfly.version>38.0.0.Final</wildfly.version>
+        <wildfly.version>39.0.1.Final</wildfly.version>
         <!-- Default WildFly/JBoss EAP `ee` BOMs version is set here and can be overridden for pulling the right BOM -->
         <bom.wildfly-ee.groupId>org.wildfly.bom</bom.wildfly-ee.groupId>
         <bom.wildfly-ee.artifactId>wildfly-ee</bom.wildfly-ee.artifactId>
@@ -49,6 +49,8 @@
         <keycloak-saml-adapter-galleon-pack.version>${keycloak.version}</keycloak-saml-adapter-galleon-pack.version>
         <!-- jslt library -->
         <org.glassfish.web.version>3.0.1</org.glassfish.web.version>
+        <!-- DataSources Feature Pack -->
+        <wildfly.datasources-feature-pack.location>org.wildfly:wildfly-datasources-galleon-pack:5.0.0.Final</wildfly.datasources-feature-pack.location>
     </properties>
 
     <modules>
@@ -177,6 +179,7 @@
                 <module>keycloak-saml-adapter-ejb</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
+                <module>postgresql-timer-application</module>
             </modules>
         </profile>
         <profile>
@@ -185,7 +188,7 @@
                 <!-- WildFly/JBoss EAP Maven Plugin coordinates -->
                 <wildfly-maven-plugin.groupId>org.jboss.eap.plugins</wildfly-maven-plugin.groupId>
                 <wildfly-maven-plugin.artifactId>eap-maven-plugin</wildfly-maven-plugin.artifactId>
-                <wildfly-maven-plugin.version>2.0.0.Beta1-redhat-00011</wildfly-maven-plugin.version>
+                <wildfly-maven-plugin.version>2.0.1.Final-redhat-00006</wildfly-maven-plugin.version>
                 <!-- Default WildFly/JBoss EAP `ee` BOMs version is set here and can be overridden for pulling the right BOM -->
                 <bom.wildfly-ee.groupId>org.jboss.bom</bom.wildfly-ee.groupId>
                 <bom.wildfly-ee.artifactId>jboss-eap-ee</bom.wildfly-ee.artifactId>
@@ -197,10 +200,12 @@
                 <!-- JBoss EAP Channel coordinates -->
                 <wildfly.ee-channel.groupId>org.jboss.eap.channels</wildfly.ee-channel.groupId>
                 <wildfly.ee-channel.artifactId>eap-8.1</wildfly.ee-channel.artifactId>
-                <wildfly.ee-channel.version>1.0.0.Beta-redhat-00023</wildfly.ee-channel.version>
+                <wildfly.ee-channel.version>1.4.0.GA-redhat-00005</wildfly.ee-channel.version>
                 <!-- Keycloak SAML -->
                 <keycloak.version>26.2.4.redhat-00013</keycloak.version>
-                <keycloak-saml-adapter-galleon-pack.version>26.4.4.redhat-00001</keycloak-saml-adapter-galleon-pack.version>
+                <keycloak-saml-adapter-galleon-pack.version>26.4.8.redhat-00002</keycloak-saml-adapter-galleon-pack.version>
+                <!-- DataSources Feature Pack -->
+                <wildfly.datasources-feature-pack.location>org.jboss.eap:eap-datasources-galleon-pack:8.1.1.Final-redhat-00007</wildfly.datasources-feature-pack.location>
             </properties>
             <modules>
                 <module>elytron-oidc-client-keycloak</module>
@@ -209,6 +214,7 @@
                 <module>activemq-artemis-ssl</module>
                 <module>keycloak-saml-adapter</module>
                 <module>keycloak-saml-adapter-ejb</module>
+                <module>postgresql-timer-application</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -285,6 +291,8 @@
                 <!-- Keycloak SAML -->
                 <keycloak.version>26.2.4.redhat-00013</keycloak.version>
                 <keycloak-saml-adapter-galleon-pack.version>26.4.4.redhat-00001</keycloak-saml-adapter-galleon-pack.version>
+                <!-- DataSources Feature Pack -->
+                <wildfly.datasources-feature-pack.location>org.jboss.eap:eap-datasources-galleon-pack:8.1.1.Final-redhat-00007</wildfly.datasources-feature-pack.location>
             </properties>
             <!--
                 The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
@@ -299,6 +307,7 @@
                 <module>keycloak-saml-adapter-ejb</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
+                <module>postgresql-timer-application</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -381,6 +390,8 @@
                 <!-- Keycloak SAML -->
                 <keycloak.version>26.2.4.redhat-00013</keycloak.version>
                 <keycloak-saml-adapter-galleon-pack.version>26.4.4.redhat-00001</keycloak-saml-adapter-galleon-pack.version>
+                <!-- DataSources Feature Pack -->
+                <wildfly.datasources-feature-pack.location>org.jboss.eap:eap-datasources-galleon-pack:8.1.1.Final-redhat-00007</wildfly.datasources-feature-pack.location>
             </properties>
             <!--
                 The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
@@ -395,6 +406,7 @@
                 <module>keycloak-saml-adapter-ejb</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
+                <module>postgresql-timer-application</module>
             </modules>
             <build>
                 <pluginManagement>

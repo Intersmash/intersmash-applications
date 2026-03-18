@@ -40,6 +40,8 @@ jobs:
           cache: 'maven'
       - name: Build with Maven
         run:  mvn -version ; mvn clean install --batch-mode -Pwildfly-target-distribution.jboss-eap
+        env:
+          POSTGRESQL_DRIVER_VERSION: '42.2.19'
 
   simple-build-eap-xp:
     if: '! github.event.pull_request.draft'
@@ -56,3 +58,5 @@ jobs:
           cache: 'maven'
       - name: Build with Maven
         run:  mvn -version ; mvn clean install --batch-mode -Pwildfly-target-distribution.jboss-eap-xp
+        env:
+          POSTGRESQL_DRIVER_VERSION: '42.2.19'
