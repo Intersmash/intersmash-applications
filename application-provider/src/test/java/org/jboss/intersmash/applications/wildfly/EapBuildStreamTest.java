@@ -42,7 +42,8 @@ public class EapBuildStreamTest {
 				ApplicationProvider.wildflyDistributedSessionsInfinispanProvisionedServerPath(),
 				ApplicationProvider.wildflyActiveMQArtemisSslProvisionedServerPath(),
 				ApplicationProvider.wildflyKeycloakSamlAdapterProvisionedServerPath(),
-				ApplicationProvider.wildflyKeycloakSamlAdapterEjbProvisionedServerPath());
+				ApplicationProvider.wildflyKeycloakSamlAdapterEjbProvisionedServerPath(),
+				ApplicationProvider.wildflyPostgresqlTimerApplicationProvisionedServerPath());
 
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path

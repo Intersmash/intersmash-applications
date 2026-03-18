@@ -35,6 +35,7 @@ public class ApplicationProvider {
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_DEPLOYMENT = "wildfly-keycloak-saml-adapter";
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_DEPLOYMENT = "wildfly-keycloak-saml-adapter-ejb";
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_BOOTABLE_JAR_DEPLOYMENT = "wildfly-keycloak-saml-adapter-ejb-bootable-jar";
+	static final String WILDFLY_POSTGRESQL_TIMER_APPLICATION_DEPLOYMENT = "wildfly-postgresql-timer-application";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR = "war";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR = "jar";
 
@@ -263,18 +264,30 @@ public class ApplicationProvider {
 	}
 
 	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code wildfly-postgresql-timer-application} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyPostgresqlTimerApplicationProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "postgresql-timer-application", "target", "server");
+	}
+
+	/**
 	 * Provides access to a WAR deployment containing the
-	 * {@code wildfly-keycloak-saml-adapter-ejb-bootable-jar} application
+	 * {@code wildfly-postgresql-timer-application} application
 	 *
 	 * @return {@link Path} instance that identifies the WAR artifact containing the
-	 *         {@code wildfly-keycloak-saml-adapter-ejb-bootable-jar} application.
+	 *         {@code wildfly-postgresql-timer-application} application.
 	 */
-	public static Path wildflyKeycloakSamlAdapterEjbBootableJarDeploymentPath() {
+	public static Path wildflyPostgresqlTimerApplicationDeploymentPath() {
 		Path file = null;
 		try {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
-					WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_BOOTABLE_JAR_DEPLOYMENT,
-					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR, "bootable")
+					WILDFLY_POSTGRESQL_TIMER_APPLICATION_DEPLOYMENT,
+					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
 					.toPath();
 		} catch (SettingsBuildingException | ArtifactResolutionException e) {
 			throw new RuntimeException("Can not get artifact", e);

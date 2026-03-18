@@ -1,0 +1,8 @@
+batch
+    /subsystem=ejb3/service=timer-service:add(thread-pool-name=default, default-data-store=emea_postgresql-EJB_TIMER_ds)
+
+    # For further description of the variables and their values please see https://github.com/wildfly-extras/wildfly-datasources-galleon-pack/blob/main/doc/postgresql/README.md
+
+    /subsystem=ejb3/service=timer-service/database-data-store=emea_postgresql-EJB_TIMER_ds:add(datasource-jndi-name=${org.wildfly.datasources.postgresql.jndi-name,env.POSTGRESQL_JNDI:java:jboss/datasources/${org.wildfly.datasources.postgresql.datasource, env.POSTGRESQL_DATASOURCE, env.OPENSHIFT_POSTGRESQL_DATASOURCE:PostgreSQLDS}}, database=postgresql, partition=emea_postgresql-EJB_TIMER_part)
+    /subsystem=ejb3/service=timer-service:write-attribute(name=default-data-store, value=emea_postgresql-EJB_TIMER_ds)
+run-batch
