@@ -171,6 +171,7 @@
             -->
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
+                <module>kafka-application</module>
                 <module>activemq-artemis-connector</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
@@ -210,6 +211,7 @@
                 <wildfly.datasources-feature-pack.location>org.jboss.eap:eap-datasources-galleon-pack:8.1.1.Final-redhat-00007</wildfly.datasources-feature-pack.location>
             </properties>
             <modules>
+                <module>kafka-application</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
@@ -302,6 +304,7 @@
             -->
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
+                <module>kafka-application</module>
                 <module>activemq-artemis-connector</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
@@ -403,6 +406,7 @@
             -->
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
+                <module>kafka-application</module>
                 <module>activemq-artemis-connector</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
