@@ -10,3 +10,5 @@
 /wildfly/distributed-sessions-infinispan/target/
 /wildfly/keycloak-saml-adapter/target/
 /wildfly/keycloak-saml-adapter-ejb/target/
+wildfly/kafka-application/target
+wildfly/keycloak-saml-adapter-ejb-bootable-jar/target
