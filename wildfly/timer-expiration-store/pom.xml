@@ -60,8 +60,7 @@
                             <location>${wildfly.datasources-feature-pack.location}</location>
                         </feature-pack>
                     </feature-packs>
-                    <layers combine.children="override">
-                        <layer>cloud-server</layer>
+                    <layers combine.children="append">
                         <layer>ejb</layer>
                         <layer>ejb-dist-cache</layer>
                         <layer>postgresql-datasource</layer>
