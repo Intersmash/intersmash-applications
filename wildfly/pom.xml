@@ -171,6 +171,7 @@
             -->
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
+                <module>activemq-artemis-connector</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
@@ -299,6 +300,7 @@
             -->
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
+                <module>activemq-artemis-connector</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
@@ -398,6 +400,7 @@
             -->
             <modules>
                 <module>microprofile-reactive-messaging-kafka</module>
+                <module>activemq-artemis-connector</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
