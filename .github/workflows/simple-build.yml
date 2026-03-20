@@ -40,6 +40,10 @@ jobs:
           cache: 'maven'
       - name: Build with Maven
         run:  mvn -version ; mvn clean install --batch-mode -Pwildfly-target-distribution.jboss-eap
+        env:
+          # JBoss EAP/Xp needs this environment variable when the Galleon "datasources" feature pack is used,
+          # see https://github.com/jbossas/eap-datasources-galleon-pack/blob/main/doc/postgresql/README.md#required-configuration
+          POSTGRESQL_DRIVER_VERSION: "42.7.7"
 
   simple-build-eap-xp:
     if: '! github.event.pull_request.draft'
@@ -56,3 +60,7 @@ jobs:
           cache: 'maven'
       - name: Build with Maven
         run:  mvn -version ; mvn clean install --batch-mode -Pwildfly-target-distribution.jboss-eap-xp
+        env:
+          # JBoss EAP/Xp needs this environment variable when the Galleon "datasources" feature pack is used,
+          # see https://github.com/jbossas/eap-datasources-galleon-pack/blob/main/doc/postgresql/README.md#required-configuration
+          POSTGRESQL_DRIVER_VERSION: "42.7.7"
