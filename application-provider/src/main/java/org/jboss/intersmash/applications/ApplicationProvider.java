@@ -32,6 +32,7 @@ public class ApplicationProvider {
 	static final String WILDFLY_WEB_CACHE_OFFLOAD_INFINISPAN_DEPLOYMENT = "wildfly-web-cache-offload-infinispan";
 	static final String WILDFLY_DISTRIBUTED_SESSIONS_INFINISPAN_DEPLOYMENT = "wildfly-distributed-sessions-infinispan";
 	static final String WILDFLY_ACTIVEMQ_ARTEMIS_BROKER_SSL_DEPLOYMENT = "wildfly-activemq-artemis-ssl";
+	static final String WILDFLY_ACTIVEMQ_ARTEMIS_CONNECTOR_DEPLOYMENT = "wildfly-activemq-artemis-connector";
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_DEPLOYMENT = "wildfly-keycloak-saml-adapter";
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_DEPLOYMENT = "wildfly-keycloak-saml-adapter-ejb";
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_BOOTABLE_JAR_DEPLOYMENT = "wildfly-keycloak-saml-adapter-ejb-bootable-jar";
@@ -274,6 +275,38 @@ public class ApplicationProvider {
 		try {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
 					WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_BOOTABLE_JAR_DEPLOYMENT,
+					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR, "bootable")
+					.toPath();
+		} catch (SettingsBuildingException | ArtifactResolutionException e) {
+			throw new RuntimeException("Can not get artifact", e);
+		}
+		return file;
+	}
+
+	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP Maven plugin, which is generated from the
+	 * {@code wildfly-activemq-artemis-connector} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP provisioned server.
+	 */
+	public static Path wildflyActiveMQArtemisConnectorProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "activemq-artemis-connector", "target", "server");
+	}
+
+	/**
+	 * Provides access to a bootable JAR deployment containing the
+	 * {@code wildfly-activemq-artemis-connector} application
+	 *
+	 * @return {@link Path} instance that identifies the JAR artifact containing the
+	 *         {@code wildfly-activemq-artemis-connector} application.
+	 */
+	public static Path wildflyActiveMQArtemisConnectorDeploymentPath() {
+		Path file = null;
+		try {
+			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
+					WILDFLY_ACTIVEMQ_ARTEMIS_CONNECTOR_DEPLOYMENT,
 					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR, "bootable")
 					.toPath();
 		} catch (SettingsBuildingException | ArtifactResolutionException e) {
