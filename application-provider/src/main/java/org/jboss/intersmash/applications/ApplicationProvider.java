@@ -35,6 +35,7 @@ public class ApplicationProvider {
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_DEPLOYMENT = "wildfly-keycloak-saml-adapter";
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_DEPLOYMENT = "wildfly-keycloak-saml-adapter-ejb";
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_BOOTABLE_JAR_DEPLOYMENT = "wildfly-keycloak-saml-adapter-ejb-bootable-jar";
+	static final String WILDFLY_ELYTRON_OIDC_CLIENT_KEYCLOAK_BOOTABLE_JAR = "wildfly-elytron-oidc-client-keycloak-bootable-jar";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR = "war";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR = "jar";
 
@@ -263,10 +264,10 @@ public class ApplicationProvider {
 	}
 
 	/**
-	 * Provides access to a WAR deployment containing the
-	 * {@code wildfly-keycloak-saml-adapter-ejb-bootable-jar} application
+	 * Provides access to the deployment artifact for the
+	 * {@code wildfly-keycloak-saml-adapter-ejb-bootable-jar} application.
 	 *
-	 * @return {@link Path} instance that identifies the WAR artifact containing the
+	 * @return {@link Path} instance that identifies the JAR artifact containing the
 	 *         {@code wildfly-keycloak-saml-adapter-ejb-bootable-jar} application.
 	 */
 	public static Path wildflyKeycloakSamlAdapterEjbBootableJarDeploymentPath() {
@@ -274,6 +275,26 @@ public class ApplicationProvider {
 		try {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
 					WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_BOOTABLE_JAR_DEPLOYMENT,
+					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR, "bootable")
+					.toPath();
+		} catch (SettingsBuildingException | ArtifactResolutionException e) {
+			throw new RuntimeException("Can not get artifact", e);
+		}
+		return file;
+	}
+
+	/**
+	 * Provides access to the deployment artifact for the
+	 * {@code wildfly-elytron-oidc-client-keycloak-bootable-jar} application.
+	 *
+	 * @return {@link Path} instance that identifies the JAR artifact containing the
+	 *         {@code wildfly-elytron-oidc-client-keycloak-bootable-jar} application.
+	 */
+	public static Path wildflyElytronOidcClientKeycloakBootableJarDeploymentPath() {
+		Path file = null;
+		try {
+			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
+					WILDFLY_ELYTRON_OIDC_CLIENT_KEYCLOAK_BOOTABLE_JAR,
 					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR, "bootable")
 					.toPath();
 		} catch (SettingsBuildingException | ArtifactResolutionException e) {

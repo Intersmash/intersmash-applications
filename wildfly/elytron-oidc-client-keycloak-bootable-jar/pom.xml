@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.jboss.intersmash.applications</groupId>
+        <artifactId>intersmash-applications-wildfly</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>wildfly-elytron-oidc-client-keycloak-bootable-jar</artifactId>
+    <packaging>war</packaging>
+    <name>Intersmash Applications :: WildFly Bootable Jar + OIDC + Keycloak </name>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>${wildfly-maven-plugin.groupId}</groupId>
+                <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
+                <version>${wildfly-maven-plugin.version}</version>
+                <!-- Use configuration from parent and append specific configuration for project - layers, cli,...-->
+                <configuration>
+                    <layers>
+                        <layer>logging</layer>
+                        <layer>jaxrs-server</layer>
+                        <layer>elytron-oidc-client</layer>
+                    </layers>
+                    <packaging-scripts>
+                        <!-- Commands and scripts are executed in the context of an embedded-server.
+                        You don't need to start and stop the embedded-server. -->
+                        <execution>
+                            <!-- List of commands -->
+                            <commands>
+                                <command>/subsystem=logging/logger=org.wildfly.security:add(level=DEBUG)</command>
+                            </commands>
+                            <scripts>
+                                <script>./scripts/management.cli</script>
+                            </scripts>
+                        </execution>
+                    </packaging-scripts>
+                    <bootable-jar>true</bootable-jar>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
