@@ -95,7 +95,7 @@
         <profile>
             <id>wildfly-target-distribution.jboss-eap-xp</id>
             <properties>
-                <wildfly-maven-plugin.version>2.0.0.Beta1-redhat-00011</wildfly-maven-plugin.version>
+                <wildfly-maven-plugin.version>2.0.1.Final-redhat-00006</wildfly-maven-plugin.version>
             </properties>
         </profile>
     </profiles>
