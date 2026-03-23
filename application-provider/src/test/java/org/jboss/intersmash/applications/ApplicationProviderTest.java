@@ -17,6 +17,7 @@ package org.jboss.intersmash.applications;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.jboss.intersmash.applications.jupiter.annotations.RequiresBootableJarSupport;
 import org.jboss.intersmash.applications.jupiter.annotations.RequiresWildflyMicroProfileSupport;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -252,6 +253,7 @@ class ApplicationProviderTest {
 	 * {@code wildfly-keycloak-saml-adapter-ejb-bootable-jar} application exists.
 	 */
 	@Test
+	@RequiresBootableJarSupport
 	void wildflyKeycloakSamlAdapterEjbBootableJarDeploymentPath_exists() {
 		Path appPath = null;
 		try {
