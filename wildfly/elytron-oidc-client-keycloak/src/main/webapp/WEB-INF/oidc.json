@@ -1,10 +1,10 @@
 {
-    "realm": "basic-auth",
-    "resource": "wildfly-basic-elytron-auth-service",
-    "auth-server-url" : "${env.SSO_APP_SERVICE}",
+    "realm": "${env.SSO_OIDC_KEYCLOAK_REALM}",
+    "resource": "${env.SSO_OIDC_CLIENT_ID}",
+    "auth-server-url" : "${env.SSO_OIDC_KEYCLOAK_URL}",
     "ssl-required" : "external",
     "disable-trust-manager": "true",
     "credentials": {
-        "secret": "${env.OIDC_SECURE_DEPLOYMENT_SECRET}"
+        "secret": "${env.SSO_OIDC_CLIENT_SECRET}"
     }
 }
