@@ -5,7 +5,7 @@
 
     <login-config>
         <auth-method>OIDC</auth-method>
-        <realm-name>basic-auth</realm-name>
+        <realm-name>${env.SSO_OIDC_KEYCLOAK_REALM}</realm-name>
     </login-config>
 
     <security-role>
