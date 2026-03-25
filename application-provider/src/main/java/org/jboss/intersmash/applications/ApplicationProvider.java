@@ -37,6 +37,7 @@ public class ApplicationProvider {
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_BOOTABLE_JAR_DEPLOYMENT = "wildfly-keycloak-saml-adapter-ejb-bootable-jar";
 	static final String WILDFLY_ELYTRON_OIDC_CLIENT_KEYCLOAK_BOOTABLE_JAR = "wildfly-elytron-oidc-client-keycloak-bootable-jar";
 	static final String WILDFLY_POSTGRESQL_TIMER_APPLICATION_DEPLOYMENT = "wildfly-postgresql-timer-application";
+	static final String WILDFLY_TIMER_EXPIRATION_STORE_DEPLOYMENT = "wildfly-timer-expiration-store";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR = "war";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR = "jar";
 
@@ -122,6 +123,18 @@ public class ApplicationProvider {
 	 */
 	public static Path wildflyWebCacheOffloadInfinispanProvisionedServerPath() {
 		return findApplicationDirectory("wildfly", "web-cache-offload-infinispan", "target", "server");
+	}
+
+	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code wildfly-timer-expiration-store} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyTimerExpirationStoreProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "timer-expiration-store", "target", "server");
 	}
 
 	/**
@@ -328,6 +341,25 @@ public class ApplicationProvider {
 		try {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
 					WILDFLY_POSTGRESQL_TIMER_APPLICATION_DEPLOYMENT,
+					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
+					.toPath();
+		} catch (SettingsBuildingException | ArtifactResolutionException e) {
+			throw new RuntimeException("Can not get artifact", e);
+		}
+		return file;
+	}
+
+	/** Provides access to a WAR deployment containing the
+	 * {@code wildfly-timer-expiration-store} application
+	 *
+	 * @return {@link Path} instance that identifies the WAR artifact containing the
+	 *         {@code wildfly-timer-expiration-store} application.
+	 */
+	public static Path wildflyTimerExpirationStoreDeploymentPath() {
+		Path file = null;
+		try {
+			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
+					WILDFLY_TIMER_EXPIRATION_STORE_DEPLOYMENT,
 					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
 					.toPath();
 		} catch (SettingsBuildingException | ArtifactResolutionException e) {
