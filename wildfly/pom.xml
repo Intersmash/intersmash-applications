@@ -201,6 +201,7 @@
                 Will build all the applications modules, like in the WildFly variant use case.
             -->
             <modules>
+                <module>microprofile-reactive-messaging-kafka</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
@@ -215,6 +216,7 @@
                 <module>activemq-artemis-connector</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
+                <module>distributed-timers-infinispan</module>
             </modules>
         </profile>
         <profile>
@@ -251,6 +253,7 @@
                 <module>keycloak-saml-adapter-ejb</module>
                 <module>postgresql-timer-application</module>
                 <module>activemq-artemis-jms-bridge</module>
+                <module>distributed-timers-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -334,6 +337,7 @@
                 The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
             -->
             <modules>
+                <module>microprofile-reactive-messaging-kafka</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
@@ -348,6 +352,7 @@
                 <module>activemq-artemis-connector</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
+                <module>distributed-timers-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -437,6 +442,7 @@
                 The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
             -->
             <modules>
+                <module>microprofile-reactive-messaging-kafka</module>
                 <module>elytron-oidc-client-keycloak</module>
                 <module>web-cache-offload-infinispan</module>
                 <module>distributed-sessions-infinispan</module>
@@ -451,6 +457,7 @@
                 <module>activemq-artemis-connector</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
+                <module>distributed-timers-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
