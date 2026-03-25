@@ -1,0 +1,28 @@
+# Configure a remote Infinispan service as the distributed timer management resource
+batch
+    # log
+    /subsystem=logging/logger=org.infinispan.client.hotrod:add(level=TRACE)
+    /subsystem=logging/logger=org.wildfly.clustering.web.infinispan:add()
+    /subsystem=logging/logger=org.wildfly.clustering.web.infinispan:write-attribute(name=level, value=TRACE)
+    /subsystem=logging/logger=org.wildfly.clustering.web.infinispan:add-handler(name=CONSOLE)
+    # Add a remote cache container implemented by an external Infinispan service, configured to use HotRod connections
+    /socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=infinispan-server:add(port=${env.JDG_PORT},host=${env.JDG_HOST})
+    /subsystem=infinispan/remote-cache-container=ejb:add(default-remote-cluster=infinispan-server-cluster, tcp-keep-alive=true, marshaller=PROTOSTREAM, modules=[org.wildfly.clustering.ejb.infinispan], statistics-enabled=true)
+    /subsystem=infinispan/remote-cache-container=ejb:write-attribute(name=properties,value={infinispan.client.hotrod.server_list=rhdg:${env.JDG_PORT},infinispan.client.hotrod.ssl_hostname_validation=false,infinispan.client.hotrod.use_auth=true,infinispan.client.hotrod.auth_username=${env.CACHE_USERNAME},infinispan.client.hotrod.auth_password=${env.CACHE_PASSWORD},infinispan.client.hotrod.auth_server_name=rhdg,infinispan.client.hotrod.sasl_properties.javax.security.sasl.qop=auth,infinispan.client.hotrod.sasl_mechanism=SCRAM-SHA-512,infinispan.client.hotrod.sni_host_name=rhdg,infinispan.client.hotrod.trust_store_file_name=/etc/secrets/truststore.jks,infinispan.client.hotrod.trust_store_type=PKCS12,infinispan.client.hotrod.trust_store_password=${env.TRUSTSTORE_PASSWORD}})
+    /subsystem=infinispan/remote-cache-container=ejb/remote-cluster=infinispan-server-cluster:add(socket-bindings=[infinispan-server])
+
+    # Add an invalidation cache for the remote cache container
+    /subsystem=infinispan/cache-container=ejb/invalidation-cache=hotrod-persistent:add
+    /subsystem=infinispan/cache-container=ejb/invalidation-cache=hotrod-persistent/component=expiration:add(interval=0)
+    /subsystem=infinispan/cache-container=ejb/invalidation-cache=hotrod-persistent/component=locking:add(isolation=REPEATABLE_READ)
+    /subsystem=infinispan/cache-container=ejb/invalidation-cache=hotrod-persistent/component=transaction:add(mode=BATCH)
+    /subsystem=infinispan/cache-container=ejb/invalidation-cache=hotrod-persistent/store=hotrod:add(remote-cache-container=ejb, fetch-state=false, purge=false, passivation=false, shared=true)
+
+    # Add an infinispan-timer-management resource to delegate the distributed timers managment to the remote cache
+    /subsystem=distributable-ejb/infinispan-timer-management=hotrod:add(cache-container=ejb, cache=hotrod-persistent)
+
+    # Unset the JDBC based persistent timer storge and use the Infinispn based one
+    /subsystem=ejb3/service=timer-service:undefine-attribute(name=default-data-store)
+    /subsystem=ejb3/service=timer-service:write-attribute(name=default-persistent-timer-management, value=hotrod)
+run-batch
+

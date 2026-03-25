@@ -11,4 +11,6 @@
 /wildfly/keycloak-saml-adapter/target/
 /wildfly/keycloak-saml-adapter-ejb/target/
 /wildfly/postgresql-timer-application/target/
-
+/wildfly/timer-expiration-store/target/
+/wildfly/keycloak-saml-adapter-ejb-bootable-jar/target/
+/wildfly/distributed-timers-infinispan/target/
