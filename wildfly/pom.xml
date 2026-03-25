@@ -180,6 +180,7 @@
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
                 <module>postgresql-timer-application</module>
+                <module>distributed-timers-infinispan</module>
             </modules>
         </profile>
         <profile>
@@ -215,6 +216,7 @@
                 <module>keycloak-saml-adapter</module>
                 <module>keycloak-saml-adapter-ejb</module>
                 <module>postgresql-timer-application</module>
+                <module>distributed-timers-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -308,6 +310,7 @@
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
                 <module>postgresql-timer-application</module>
+                <module>distributed-timers-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
@@ -407,6 +410,7 @@
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
                 <module>postgresql-timer-application</module>
+                <module>distributed-timers-infinispan</module>
             </modules>
             <build>
                 <pluginManagement>
