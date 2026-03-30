@@ -1,0 +1,9 @@
+batch
+/subsystem=elytron/key-store=truststore-ssl-test:add(credential-reference={clear-text=${env.TRUST_STORE_PASSWORD:changeit}}, path="${env.TRUST_STORE_PATH:/etc/secrets/client.ts.WONT-WORK}", required=false, type=${env.TRUST_STORE_TYPE:PKCS12})
+/subsystem=elytron/trust-manager=truststore-ssl-test:add(key-store=truststore-ssl-test)
+
+/subsystem=elytron/key-store=keystore-ssl-test:add(credential-reference={clear-text=${env.KEY_STORE_PASSWORD:changeit}}, path="${env.KEY_STORE_PATH:/etc/secrets/broker.ks.WONT-WORK}", required=false, type=${env.KEY_STORE_TYPE:PKCS12})
+/subsystem=elytron/key-manager=keystore-ssl-test:add(key-store=keystore-ssl-test,credential-reference={clear-text=${env.KEY_STORE_PASSWORD:changeit}})
+
+/subsystem=elytron/client-ssl-context=amqp-ssl-test:add(trust-manager=truststore-ssl-test,key-manager=keystore-ssl-test)
+run-batch
