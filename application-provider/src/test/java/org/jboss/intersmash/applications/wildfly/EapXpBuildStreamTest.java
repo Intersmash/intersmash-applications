@@ -37,7 +37,6 @@ public class EapXpBuildStreamTest {
 	@Test
 	void validateEapXpBuildProvisioningFile() {
 		final Stream<Path> provisionedServerPaths = Stream.of(
-				ApplicationProvider.wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath(),
 				ApplicationProvider.wildflyElytronOidcClientKeycloakProvisionedServerPath(),
 				ApplicationProvider.wildflyWebCacheOffloadInfinispanProvisionedServerPath(),
 				ApplicationProvider.wildflyDistributedSessionsInfinispanProvisionedServerPath(),

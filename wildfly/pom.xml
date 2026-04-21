@@ -170,7 +170,6 @@
                 Will build all the applications modules, like in the WildFly variant use case.
             -->
             <modules>
-                <module>microprofile-reactive-messaging-kafka</module>
                 <module>kafka-application</module>
                 <module>activemq-artemis-connector</module>
                 <module>elytron-oidc-client-keycloak</module>
@@ -303,7 +302,6 @@
                 The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
             -->
             <modules>
-                <module>microprofile-reactive-messaging-kafka</module>
                 <module>kafka-application</module>
                 <module>activemq-artemis-connector</module>
                 <module>elytron-oidc-client-keycloak</module>
@@ -405,7 +403,6 @@
                 The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
             -->
             <modules>
-                <module>microprofile-reactive-messaging-kafka</module>
                 <module>kafka-application</module>
                 <module>activemq-artemis-connector</module>
                 <module>elytron-oidc-client-keycloak</module>

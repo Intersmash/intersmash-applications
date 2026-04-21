@@ -45,18 +45,6 @@ public class ApplicationProvider {
 
 	/**
 	 * Provides access to a filesystem directory containing a server provisioned by
-	 * the WildFly/JBoss EAP Maven plugin, which is generated from the
-	 * {@code wildfly-microprofile-reactive-messaging-kafka} application
-	 *
-	 * @return {@link Path} instance that identifies the directory containing the
-	 *         WildFly/JBoss EAP provisioned server.
-	 */
-	public static Path wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath() {
-		return findApplicationDirectory("wildfly", "microprofile-reactive-messaging-kafka", "target", "server");
-	}
-
-	/**
-	 * Provides access to a filesystem directory containing a server provisioned by
 	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
 	 * {@code wildfly-distributed-sessions-infinispan} application
 	 *
@@ -137,26 +125,6 @@ public class ApplicationProvider {
 	 */
 	public static Path wildflyWebCacheOffloadInfinispanProvisionedServerPath() {
 		return findApplicationDirectory("wildfly", "web-cache-offload-infinispan", "target", "server");
-	}
-
-	/**
-	 * Provides access to a WAR deployment containing the
-	 * {@code wildfly-microprofile-reactive-messaging-kafka} application
-	 *
-	 * @return {@link Path} instance that identifies the WAR artifact containing the
-	 *         {@code wildfly-microprofile-reactive-messaging-kafka} application.
-	 */
-	public static Path wildflyMicroprofileReactiveMessagingKafkaDeploymentPath() {
-		Path file = null;
-		try {
-			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
-					WILDFLY_MICROPROFILE_REACTIVE_MESSAGING_KAFKA_DEPLOYMENT,
-					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
-					.toPath();
-		} catch (SettingsBuildingException | ArtifactResolutionException e) {
-			throw new RuntimeException("Can not get artifact", e);
-		}
-		return file;
 	}
 
 	/**
