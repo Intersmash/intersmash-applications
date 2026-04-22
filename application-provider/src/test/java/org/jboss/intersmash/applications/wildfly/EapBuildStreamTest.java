@@ -44,7 +44,6 @@ public class EapBuildStreamTest {
 				ApplicationProvider.wildflyKeycloakSamlAdapterProvisionedServerPath(),
 				ApplicationProvider.wildflyKeycloakSamlAdapterEjbProvisionedServerPath(),
 				ApplicationProvider.wildflyPostgresqlTimerApplicationProvisionedServerPath(),
-				ApplicationProvider.wildflyKafkaApplicationProvisionedServerPath(),
 				ApplicationProvider.wildflyActiveMQArtemisConnectorProvisionedServerPath());
 
 		provisionedServerPaths.forEach((path) -> {

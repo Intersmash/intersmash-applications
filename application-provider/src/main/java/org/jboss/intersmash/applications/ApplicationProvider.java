@@ -129,6 +129,30 @@ public class ApplicationProvider {
 	/**
 	 * Provides access to a filesystem directory containing a server provisioned by
 	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code keycloak-saml-adapter-ejb-bootable-jar} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyKeycloakSamlAdapterEjbBootableJarProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "keycloak-saml-adapter-ejb-bootable-jar", "target", "server");
+	}
+
+	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code elytron-oidc-client-keycloak-bootable-jar} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyElytronOidcClientKeycloakBootableJarProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "elytron-oidc-client-keycloak-bootable-jar", "target", "server");
+	}
+
+	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
 	 * {@code wildfly-kafka-application} application
 	 *
 	 * @return {@link Path} instance that identifies the directory containing the
