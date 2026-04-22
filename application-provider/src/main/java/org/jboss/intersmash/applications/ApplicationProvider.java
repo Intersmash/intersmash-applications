@@ -357,7 +357,7 @@ public class ApplicationProvider {
 	 * @return {@link Path} instance that identifies the JAR artifact containing the
 	 *         {@code wildfly-activemq-artemis-connector} application.
 	 */
-	public static Path wildflyActiveMQArtemisConnectorDeploymentPath() {
+	public static Path wildflyActiveMQArtemisConnectorBootableJarDeploymentPath() {
 		Path file = null;
 		try {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
