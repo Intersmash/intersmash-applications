@@ -27,7 +27,6 @@ import org.jboss.intersmash.applications.maven.ArtifactProvider;
  * deployments (e.g.: WAR, JAR) must be installed in local repository.
  */
 public class ApplicationProvider {
-	static final String WILDFLY_MICROPROFILE_REACTIVE_MESSAGING_KAFKA_DEPLOYMENT = "wildfly-microprofile-reactive-messaging-kafka";
 	static final String WILDFLY_ELYTRON_OIDC_CLIENT_KEYCLOAK_DEPLOYMENT = "wildfly-elytron-oidc-client-keycloak";
 	static final String WILDFLY_WEB_CACHE_OFFLOAD_INFINISPAN_DEPLOYMENT = "wildfly-web-cache-offload-infinispan";
 	static final String WILDFLY_DISTRIBUTED_SESSIONS_INFINISPAN_DEPLOYMENT = "wildfly-distributed-sessions-infinispan";

@@ -296,6 +296,22 @@ class ApplicationProviderTest {
 		assertPathExist(appPath);
 	}
 
+	/**
+	 * Verify that a BOOTABLE JAR deployment for the
+	 * {@code wildfly-kafka-application} application exists.
+	 */
+	@Test
+	@RequiresBootableJarSupport
+	void wildflyKafkaApplicationBootableJarDeploymentPath_exists() {
+		Path appPath = null;
+		try {
+			appPath = ApplicationProvider.wildflyKafkaApplicationBootableJarDeploymentPath();
+		} catch (Throwable e) {
+			Assertions.fail(e);
+		}
+		assertPathExist(appPath);
+	}
+
 	private static void assertPathExist(final Path path) {
 		Assertions.assertNotNull(path);
 		Assertions.assertTrue(Files.exists(path));
