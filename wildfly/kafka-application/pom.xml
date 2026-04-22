@@ -123,19 +123,5 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>wildfly-target-distribution.jboss-eap</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>${wildfly-maven-plugin.groupId}</groupId>
-                        <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 </project>
