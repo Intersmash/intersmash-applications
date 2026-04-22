@@ -127,6 +127,18 @@ public class ApplicationProvider {
 	}
 
 	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code wildfly-kafka-application} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyKafkaApplicationProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "kafka-application", "target", "server");
+	}
+
+	/**
 	 * Provides access to a WAR deployment containing the
 	 * {@code wildfly-elytron-oidc-client-keycloak} application
 	 *
