@@ -1,0 +1,1 @@
+/interface=management:write-attribute(name=inet-address, value="${jboss.bind.address.management:0.0.0.0}")
