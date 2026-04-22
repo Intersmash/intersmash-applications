@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.jboss.intersmash.applications</groupId>
+        <artifactId>intersmash-applications-wildfly</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>wildfly-kafka-application</artifactId>
+    <packaging>war</packaging>
+    <name>Intersmash Applications :: WildFly Bootable Jar :: Kafka</name>
+
+    <properties>
+        <version.org.apache.kafka.kafka-clients>3.7.1</version.org.apache.kafka.kafka-clients>
+        <version.microprofile-reactive-messaging-api>2.0.1</version.microprofile-reactive-messaging-api>
+        <version.microprofile-reactive-streams-operators-api>1.0.1</version.microprofile-reactive-streams-operators-api>
+        <version.smallrye-reactive-messaging-kafka-api>3.18.0</version.smallrye-reactive-messaging-kafka-api>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.microprofile.reactive.messaging</groupId>
+            <artifactId>microprofile-reactive-messaging-api</artifactId>
+            <version>${version.microprofile-reactive-messaging-api}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <scope>provided</scope>
+            <version>${version.org.apache.kafka.kafka-clients}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
+            <artifactId>microprofile-reactive-streams-operators-api</artifactId>
+            <version>${version.microprofile-reactive-streams-operators-api}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-messaging-kafka-api</artifactId>
+            <version>${version.smallrye-reactive-messaging-kafka-api}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>${wildfly-maven-plugin.groupId}</groupId>
+                <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
+                <configuration>
+                    <layers combine.children="append">
+                        <layer>h2-default-datasource</layer>
+                        <layer>microprofile-reactive-messaging-kafka</layer>
+                    </layers>
+                    <packaging-scripts>
+                        <packaging-script>
+                            <scripts>
+                                <script>./scripts/script.cli</script>
+                                <script>./scripts/management.cli</script>
+                            </scripts>
+                            <!-- We want the env variables to be resolved during server execution -->
+                            <resolve-expressions>false</resolve-expressions>
+                        </packaging-script>
+                    </packaging-scripts>
+                    <bootable-jar>true</bootable-jar>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>s2i</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>${wildfly-maven-plugin.groupId}</groupId>
+                        <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
+                        <configuration>
+                            <bootable-jar>false</bootable-jar>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

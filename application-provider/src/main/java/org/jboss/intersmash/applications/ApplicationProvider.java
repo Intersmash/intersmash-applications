@@ -27,7 +27,6 @@ import org.jboss.intersmash.applications.maven.ArtifactProvider;
  * deployments (e.g.: WAR, JAR) must be installed in local repository.
  */
 public class ApplicationProvider {
-	static final String WILDFLY_MICROPROFILE_REACTIVE_MESSAGING_KAFKA_DEPLOYMENT = "wildfly-microprofile-reactive-messaging-kafka";
 	static final String WILDFLY_ELYTRON_OIDC_CLIENT_KEYCLOAK_DEPLOYMENT = "wildfly-elytron-oidc-client-keycloak";
 	static final String WILDFLY_WEB_CACHE_OFFLOAD_INFINISPAN_DEPLOYMENT = "wildfly-web-cache-offload-infinispan";
 	static final String WILDFLY_DISTRIBUTED_SESSIONS_INFINISPAN_DEPLOYMENT = "wildfly-distributed-sessions-infinispan";
@@ -39,20 +38,9 @@ public class ApplicationProvider {
 	static final String WILDFLY_KEYCLOAK_SAML_ADAPTER_EJB_BOOTABLE_JAR_DEPLOYMENT = "wildfly-keycloak-saml-adapter-ejb-bootable-jar";
 	static final String WILDFLY_ELYTRON_OIDC_CLIENT_KEYCLOAK_BOOTABLE_JAR = "wildfly-elytron-oidc-client-keycloak-bootable-jar";
 	static final String WILDFLY_POSTGRESQL_TIMER_APPLICATION_DEPLOYMENT = "wildfly-postgresql-timer-application";
+	static final String WILDFLY_KAFKA_APPLICATION_DEPLOYMENT = "wildfly-kafka-application";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR = "war";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR = "jar";
-
-	/**
-	 * Provides access to a filesystem directory containing a server provisioned by
-	 * the WildFly/JBoss EAP Maven plugin, which is generated from the
-	 * {@code wildfly-microprofile-reactive-messaging-kafka} application
-	 *
-	 * @return {@link Path} instance that identifies the directory containing the
-	 *         WildFly/JBoss EAP provisioned server.
-	 */
-	public static Path wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath() {
-		return findApplicationDirectory("wildfly", "microprofile-reactive-messaging-kafka", "target", "server");
-	}
 
 	/**
 	 * Provides access to a filesystem directory containing a server provisioned by
@@ -139,23 +127,39 @@ public class ApplicationProvider {
 	}
 
 	/**
-	 * Provides access to a WAR deployment containing the
-	 * {@code wildfly-microprofile-reactive-messaging-kafka} application
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code keycloak-saml-adapter-ejb-bootable-jar} application
 	 *
-	 * @return {@link Path} instance that identifies the WAR artifact containing the
-	 *         {@code wildfly-microprofile-reactive-messaging-kafka} application.
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
 	 */
-	public static Path wildflyMicroprofileReactiveMessagingKafkaDeploymentPath() {
-		Path file = null;
-		try {
-			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
-					WILDFLY_MICROPROFILE_REACTIVE_MESSAGING_KAFKA_DEPLOYMENT,
-					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
-					.toPath();
-		} catch (SettingsBuildingException | ArtifactResolutionException e) {
-			throw new RuntimeException("Can not get artifact", e);
-		}
-		return file;
+	public static Path wildflyKeycloakSamlAdapterEjbBootableJarProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "keycloak-saml-adapter-ejb-bootable-jar", "target", "server");
+	}
+
+	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code elytron-oidc-client-keycloak-bootable-jar} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyElytronOidcClientKeycloakBootableJarProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "elytron-oidc-client-keycloak-bootable-jar", "target", "server");
+	}
+
+	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code wildfly-kafka-application} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyKafkaApplicationProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "kafka-application", "target", "server");
 	}
 
 	/**
@@ -389,11 +393,31 @@ public class ApplicationProvider {
 	 * @return {@link Path} instance that identifies the JAR artifact containing the
 	 *         {@code wildfly-activemq-artemis-connector} application.
 	 */
-	public static Path wildflyActiveMQArtemisConnectorDeploymentPath() {
+	public static Path wildflyActiveMQArtemisConnectorBootableJarDeploymentPath() {
 		Path file = null;
 		try {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
 					WILDFLY_ACTIVEMQ_ARTEMIS_CONNECTOR_DEPLOYMENT,
+					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR, "bootable")
+					.toPath();
+		} catch (SettingsBuildingException | ArtifactResolutionException e) {
+			throw new RuntimeException("Can not get artifact", e);
+		}
+		return file;
+	}
+
+	/**
+	 * Provides access to a bootable JAR deployment containing the
+	 * {@code wildfly-kafka-application} application
+	 *
+	 * @return {@link Path} instance that identifies the bootable JAR artifact containing the
+	 *         {@code wildfly-kafka-application} application.
+	 */
+	public static Path wildflyKafkaApplicationBootableJarDeploymentPath() {
+		Path file = null;
+		try {
+			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
+					WILDFLY_KAFKA_APPLICATION_DEPLOYMENT,
 					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR, "bootable")
 					.toPath();
 		} catch (SettingsBuildingException | ArtifactResolutionException e) {

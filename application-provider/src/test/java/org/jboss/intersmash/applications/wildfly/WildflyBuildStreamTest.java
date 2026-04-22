@@ -35,9 +35,8 @@ public class WildflyBuildStreamTest {
 	 * {@code wildfly-galleon-pack} declaration.
 	 */
 	@Test
-	void validateWildflyBuildProvisioningFile() throws IOException {
+	void validateWildflyBuildProvisioningFile() {
 		final Stream<Path> provisionedServerPaths = Stream.of(
-				ApplicationProvider.wildflyMicroprofileReactiveMessagingKafkaProvisionedServerPath(),
 				ApplicationProvider.wildflyElytronOidcClientKeycloakProvisionedServerPath(),
 				ApplicationProvider.wildflyWebCacheOffloadInfinispanProvisionedServerPath(),
 				ApplicationProvider.wildflyDistributedSessionsInfinispanProvisionedServerPath(),
@@ -46,7 +45,10 @@ public class WildflyBuildStreamTest {
 				ApplicationProvider.wildflyKeycloakSamlAdapterEjbProvisionedServerPath(),
 				ApplicationProvider.wildflyPostgresqlTimerApplicationProvisionedServerPath(),
 				ApplicationProvider.wildflyActiveMQArtemisConnectorProvisionedServerPath(),
-				ApplicationProvider.wildflyActiveMQArtemisJmsBridgeProvisionedServerPath());
+				ApplicationProvider.wildflyActiveMQArtemisJmsBridgeProvisionedServerPath(),
+				ApplicationProvider.wildflyKafkaApplicationProvisionedServerPath(),
+				ApplicationProvider.wildflyElytronOidcClientKeycloakBootableJarProvisionedServerPath(),
+				ApplicationProvider.wildflyKeycloakSamlAdapterEjbBootableJarProvisionedServerPath());
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path
 					.of(path + "/.wildfly-maven-plugin-provisioning.xml");
