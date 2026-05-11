@@ -51,6 +51,11 @@
         <org.glassfish.web.version>3.0.1</org.glassfish.web.version>
         <!-- DataSources Feature Pack -->
         <wildfly.datasources-feature-pack.location>org.wildfly:wildfly-datasources-galleon-pack:5.0.0.Final</wildfly.datasources-feature-pack.location>
+        <!-- kafka -->
+        <version.org.apache.kafka.kafka-clients>3.7.1</version.org.apache.kafka.kafka-clients>
+        <version.microprofile-reactive-messaging-api>2.0.1</version.microprofile-reactive-messaging-api>
+        <version.microprofile-reactive-streams-operators-api>1.0.1</version.microprofile-reactive-streams-operators-api>
+        <version.smallrye-reactive-messaging-kafka-api>3.18.0</version.smallrye-reactive-messaging-kafka-api>
     </properties>
 
     <modules>
@@ -84,6 +89,32 @@
                 <groupId>org.glassfish.web</groupId>
                 <artifactId>jakarta.servlet.jsp.jstl</artifactId>
                 <version>${org.glassfish.web.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.microprofile.reactive.messaging</groupId>
+                <artifactId>microprofile-reactive-messaging-api</artifactId>
+                <version>${version.microprofile-reactive-messaging-api}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <scope>provided</scope>
+                <version>${version.org.apache.kafka.kafka-clients}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
+                <artifactId>microprofile-reactive-streams-operators-api</artifactId>
+                <version>${version.microprofile-reactive-streams-operators-api}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.smallrye.reactive</groupId>
+                <artifactId>smallrye-reactive-messaging-kafka-api</artifactId>
+                <version>${version.smallrye-reactive-messaging-kafka-api}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -180,6 +211,7 @@
                 <module>activemq-artemis-jms-bridge</module>
                 <!-- Bootable Jar -->
                 <module>kafka-application</module>
+                <module>kafka-sasl-application</module>
                 <module>activemq-artemis-connector</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
@@ -312,6 +344,7 @@
                 <module>activemq-artemis-jms-bridge</module>
                 <!-- Bootable Jar -->
                 <module>kafka-application</module>
+                <module>kafka-sasl-application</module>
                 <module>activemq-artemis-connector</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>
@@ -414,6 +447,7 @@
                 <module>activemq-artemis-jms-bridge</module>
                 <!-- Bootable Jar -->
                 <module>kafka-application</module>
+                <module>kafka-sasl-application</module>
                 <module>activemq-artemis-connector</module>
                 <module>keycloak-saml-adapter-ejb-bootable-jar</module>
                 <module>elytron-oidc-client-keycloak-bootable-jar</module>

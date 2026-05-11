@@ -47,6 +47,7 @@ public class EapXpBuildStreamTest {
 				ApplicationProvider.wildflyActiveMQArtemisConnectorProvisionedServerPath(),
 				ApplicationProvider.wildflyActiveMQArtemisJmsBridgeProvisionedServerPath(),
 				ApplicationProvider.wildflyKafkaApplicationProvisionedServerPath(),
+				ApplicationProvider.wildflyKafkaSaslApplicationProvisionedServerPath(),
 				ApplicationProvider.wildflyElytronOidcClientKeycloakBootableJarProvisionedServerPath(),
 				ApplicationProvider.wildflyKeycloakSamlAdapterEjbBootableJarProvisionedServerPath());
 		provisionedServerPaths.forEach((path) -> {
