@@ -39,6 +39,7 @@ public class ApplicationProvider {
 	static final String WILDFLY_ELYTRON_OIDC_CLIENT_KEYCLOAK_BOOTABLE_JAR = "wildfly-elytron-oidc-client-keycloak-bootable-jar";
 	static final String WILDFLY_POSTGRESQL_TIMER_APPLICATION_DEPLOYMENT = "wildfly-postgresql-timer-application";
 	static final String WILDFLY_KAFKA_APPLICATION_DEPLOYMENT = "wildfly-kafka-application";
+	static final String WILDFLY_KAFKA_SASL_APPLICATION_DEPLOYMENT = "wildfly-kafka-sasl-application";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR = "war";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR = "jar";
 
@@ -431,6 +432,26 @@ public class ApplicationProvider {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
 					WILDFLY_KAFKA_APPLICATION_DEPLOYMENT,
 					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR, "bootable")
+					.toPath();
+		} catch (SettingsBuildingException | ArtifactResolutionException e) {
+			throw new RuntimeException("Can not get artifact", e);
+		}
+		return file;
+	}
+
+	/**
+	 * Provides access to a WAR deployment containing the
+	 * {@code wildfly-kafka-sasl-application} application
+	 *
+	 * @return {@link Path} instance that identifies the WAR artifact containing the
+	 *         {@code wildfly-kafka-sasl-application} application.
+	 */
+	public static Path wildflyKafkaSaslApplicationDeploymentPath() {
+		Path file = null;
+		try {
+			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
+							WILDFLY_KAFKA_SASL_APPLICATION_DEPLOYMENT,
+							ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
 					.toPath();
 		} catch (SettingsBuildingException | ArtifactResolutionException e) {
 			throw new RuntimeException("Can not get artifact", e);
