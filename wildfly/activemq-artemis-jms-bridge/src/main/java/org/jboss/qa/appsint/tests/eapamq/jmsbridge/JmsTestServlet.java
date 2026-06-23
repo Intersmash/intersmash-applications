@@ -5,12 +5,14 @@ import jakarta.inject.Inject;
 import jakarta.jms.JMSContext;
 import jakarta.jms.Queue;
 import jakarta.jms.TextMessage;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,10 +36,16 @@ public class JmsTestServlet extends HttpServlet {
 	@Inject()
 	private JMSContext context;
 
+	private static final AtomicInteger COUNTER = new AtomicInteger(1);
+
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+		String message = QUEUE_TEXT_MESSAGE.concat(" progressive ").concat(String.valueOf(COUNTER.getAndIncrement()));
+		LOGGER.log(Level.INFO, String.format("Sending message '%s' to jmsBridgeSourceQueue ...", message));
+
 		resp.setContentType("text/html");
 		TextMessage textMessage;
+		Exception error = null;
 
 		String request = req.getParameter("request");
 
@@ -45,7 +53,7 @@ public class JmsTestServlet extends HttpServlet {
 			switch (request) {
 				case REQUEST_PRODUCE:
 					// produce and send a text message to a queue
-					textMessage = context.createTextMessage(QUEUE_TEXT_MESSAGE);
+					textMessage = context.createTextMessage(message);
 					context.createProducer().send(queue, textMessage);
 					out.println(QUEUE_SEND_RESPONSE + queue.toString());
 					break;
@@ -58,7 +66,11 @@ public class JmsTestServlet extends HttpServlet {
 					out.println("Usage: use <b>?produce</b> parameter to sent a message to test queue");
 			}
 		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, e.getMessage());
+			LOGGER.log(Level.SEVERE, "Error sending message to jmsBridgeSourceQueue!", e);
+			error = e;
+		}
+		if (error != null) {
+			throw new ServletException("Error sending message to jmsBridgeSourceQueue!", error);
 		}
 	}
 }
