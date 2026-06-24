@@ -11,6 +11,19 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.jboss.intersmash.applications.wildfly.distributed.timers.config.Config;
 
+/**
+ * JAX-RS resource that exposes a REST API for managing distributed EJB interval timers.
+ *
+ * <p>Timers are identified by an {@code applicationInfo} string. When no identifier is supplied,
+ * the fully-qualified class name of this endpoint is used as the default.
+ *
+ * <p>Timer state is persisted to a remote Infinispan server (via the {@code hotrod-persistent}
+ * cache configured in {@code remote-infinispan.cli}), so timers survive application restarts
+ * and are visible across a WildFly cluster. Each timer execution is recorded by the remote
+ * {@code timer-expiration-store} service.
+ *
+ * @see TransactionalRecurringTimerService
+ */
 @Path("/timer")
 public class TimerManagementEndpoint {
 	private static final String RECURRING_TIMER_APPLICATION_INFO = TimerManagementEndpoint.class.getName();
@@ -18,6 +31,19 @@ public class TimerManagementEndpoint {
 	@EJB
 	private TransactionalRecurringTimerService transactionalRecurringTimerService;
 
+	/**
+	 * Creates a recurring interval timer.
+	 *
+	 * <p>The timer will first fire after {@code initialDelay} milliseconds and then repeat every
+	 * {@code expirationInterval} milliseconds. Both values fall back to the application
+	 * configuration (see {@link Config}) when not provided.
+	 *
+	 * @param initialDelay       milliseconds before the timer first fires (default: 10 000)
+	 * @param expirationInterval milliseconds between subsequent executions (default: 1 000)
+	 * @param applicationInfo    identifier used to look up or cancel the timer later;
+	 *                           defaults to this class's fully-qualified name
+	 * @return {@code 200 OK} on success
+	 */
 	@GET
 	@Path("/custom-interval")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -32,6 +58,13 @@ public class TimerManagementEndpoint {
 		return Response.ok().build();
 	}
 
+	/**
+	 * Looks up an active timer by its {@code applicationInfo} identifier.
+	 *
+	 * @param applicationInfo the identifier that was assigned when the timer was created
+	 * @return {@code 200 OK} with a message containing the timer info if found,
+	 *         or {@code 404 Not Found} if no active timer matches
+	 */
 	@GET
 	@Path("/custom-interval/{applicationInfo}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -53,6 +86,13 @@ public class TimerManagementEndpoint {
 				.build();
 	}
 
+	/**
+	 * Cancels an active timer identified by its {@code applicationInfo}.
+	 *
+	 * @param applicationInfo the identifier of the timer to cancel
+	 * @return {@code 200 OK} with a confirmation message if the timer was found and cancelled,
+	 *         or {@code 404 Not Found} if no active timer matches
+	 */
 	@DELETE
 	@Path("/custom-interval/{applicationInfo}")
 	@Produces(MediaType.APPLICATION_JSON)
