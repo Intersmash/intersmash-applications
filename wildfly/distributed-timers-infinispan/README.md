@@ -88,3 +88,24 @@ During provisioning, `scripts/remote-infinispan.cli` configures the server to:
 2. Create a local invalidation cache (`hotrod-persistent`) backed by the remote HotRod store.
 3. Register an `infinispan-timer-management` resource that uses this cache.
 4. Replace the default JDBC-based timer persistence with the Infinispan-based one.
+
+## Timer persistence: Infinispan vs PostgreSQL
+
+The WildFly EJB3 timer service (`/subsystem=ejb3/service=timer-service`) supports two mutually
+exclusive attributes for configuring how persistent timers are stored:
+
+| Attribute | Used by | Backend | Cluster-aware |
+|-----------|---------|---------|---------------|
+| `default-data-store` | [postgresql-timer-application](../postgresql-timer-application) | JDBC `database-data-store` writing to the `jboss_ejb_timer` PostgreSQL table | No (single-node) |
+| `default-persistent-timer-management` | **this application** | `infinispan-timer-management` resource backed by a remote Infinispan cache via HotRod | Yes |
+
+This application **undefines** `default-data-store` and sets
+`default-persistent-timer-management=hotrod`, delegating timer state to the `distributable-ejb`
+subsystem's `infinispan-timer-management` resource. Timer state lives in a remote Infinispan
+cluster rather than a local SQL table, which makes timers visible and recoverable across all
+WildFly nodes in the cluster.
+
+The sibling [postgresql-timer-application](../postgresql-timer-application) demonstrates the
+classic single-node approach: it sets `default-data-store` to a `database-data-store` backed by a
+PostgreSQL datasource, and timer metadata is written to the `jboss_ejb_timer` table managed by
+WildFly internally.
