@@ -133,7 +133,7 @@ public class TransactionalRecurringTimerService {
 	}
 
 	private static TimerExpirationStore getTimerExpirationStoreProxy(InitialContext context) throws NamingException {
-		String lookupName = "ejb:/ROOT/TimerExpirationStoreImpl!org.jboss.intersmash.applications.wildfly.distributed.timers.expiration.TimerExpirationStore";
+		String lookupName = "ejb:/ROOT/TimerExpirationStoreImpl!org.jboss.intersmash.applications.wildfly.timer.expiration.store.TimerExpirationStore";
 		return (TimerExpirationStore) context.lookup(lookupName);
 	}
 
