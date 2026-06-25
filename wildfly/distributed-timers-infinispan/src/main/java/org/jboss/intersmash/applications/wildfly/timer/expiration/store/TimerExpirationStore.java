@@ -6,13 +6,13 @@ import java.util.List;
 
 @Remote
 public interface TimerExpirationStore {
-	MonitoredTimerExpiration createTimerExpiration(MonitoredTimerExpiration monitoredTimerExpiration);
+	MonitoredTimerExpiration create(MonitoredTimerExpiration monitoredTimerExpiration);
 
 	List<MonitoredTimerExpiration> getAll();
 
-	MonitoredTimerExpiration getTimerExpiration(Long id);
+	MonitoredTimerExpiration getById(Long id);
 
-	List<MonitoredTimerExpiration> getTimerExpirations(Instant from, Instant to);
+	List<MonitoredTimerExpiration> getInTimeRange(Instant from, Instant to);
 
 	int deleteAll();
 }

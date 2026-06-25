@@ -124,7 +124,7 @@ public class TransactionalRecurringTimerService {
 					now);
 			// save the new timer expiration data
 			LOGGER.info("--->>> Sending timer expiration data to service: " + timerExpiration);
-			MonitoredTimerExpiration created = timerExpirationStoreProxy.createTimerExpiration(timerExpiration);
+			MonitoredTimerExpiration created = timerExpirationStoreProxy.create(timerExpiration);
 			// read the newly created timer expiration data to output some log messages
 			LOGGER.info("<<<--- Got timer expiration back from service: " + created.toString());
 		} catch (UnknownHostException e) {

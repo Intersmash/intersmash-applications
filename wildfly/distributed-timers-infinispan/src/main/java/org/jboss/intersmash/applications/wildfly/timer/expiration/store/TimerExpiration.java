@@ -90,8 +90,10 @@ public class TimerExpiration implements MonitoredTimerExpiration {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		TimerExpiration that = (TimerExpiration) o;
-		return executor.equals(that.executor) && name.equals(that.name) && info.equals(that.info)
-				&& timestamp.equals(that.timestamp);
+		return Objects.equals(executor, that.executor) &&
+				Objects.equals(name, that.name) &&
+				Objects.equals(info, that.info) &&
+				Objects.equals(timestamp, that.timestamp);
 	}
 
 	@Override
