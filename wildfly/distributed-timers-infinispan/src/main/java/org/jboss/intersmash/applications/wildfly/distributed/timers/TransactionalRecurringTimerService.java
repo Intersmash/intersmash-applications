@@ -20,9 +20,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.jboss.intersmash.applications.wildfly.distributed.timers.config.Config;
-import org.jboss.intersmash.applications.wildfly.distributed.timers.expiration.MonitoredTimerExpiration;
-import org.jboss.intersmash.applications.wildfly.distributed.timers.expiration.TimerExpiration;
-import org.jboss.intersmash.applications.wildfly.distributed.timers.expiration.TimerExpirationStore;
+import org.jboss.intersmash.applications.wildfly.timer.expiration.store.MonitoredTimerExpiration;
+import org.jboss.intersmash.applications.wildfly.timer.expiration.store.TimerExpiration;
+import org.jboss.intersmash.applications.wildfly.timer.expiration.store.TimerExpirationStore;
 
 @Stateless
 public class TransactionalRecurringTimerService {

@@ -1,4 +1,4 @@
-package org.jboss.intersmash.applications.wildfly.distributed.timers.expiration;
+package org.jboss.intersmash.applications.wildfly.timer.expiration.store;
 
 import jakarta.ejb.Remote;
 import java.time.Instant;
