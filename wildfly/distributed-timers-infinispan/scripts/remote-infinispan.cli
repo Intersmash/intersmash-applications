@@ -1,9 +1,9 @@
 # Configure a remote Infinispan service as the distributed timer management resource
 batch
     # log
-    /subsystem=logging/logger=org.infinispan.client.hotrod:add(level=TRACE)
+    /subsystem=logging/logger=org.infinispan.client.hotrod:add(level=INFO)
     /subsystem=logging/logger=org.wildfly.clustering.web.infinispan:add()
-    /subsystem=logging/logger=org.wildfly.clustering.web.infinispan:write-attribute(name=level, value=TRACE)
+    /subsystem=logging/logger=org.wildfly.clustering.web.infinispan:write-attribute(name=level, value=INFO)
     /subsystem=logging/logger=org.wildfly.clustering.web.infinispan:add-handler(name=CONSOLE)
     # Add a remote cache container implemented by an external Infinispan service, configured to use HotRod connections
     /socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=infinispan-server:add(port=${env.JDG_PORT},host=${env.JDG_HOST})
