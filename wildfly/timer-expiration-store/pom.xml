@@ -61,13 +61,13 @@
                         </feature-pack>
                     </feature-packs>
                     <layers combine.children="append">
-                        <layer>ejb</layer>
-                        <layer>ejb-dist-cache</layer>
+                        <!--<layer>ejb</layer>-->
+                        <!--<layer>ejb-dist-cache</layer>-->
                         <layer>postgresql-datasource</layer>
                     </layers>
-                    <excluded-layers>
+                    <!--<excluded-layers>
                         <layer>ejb-local-cache</layer>
-                    </excluded-layers>
+                    </excluded-layers>-->
                     <!--
                         A list of directory that contains content to copy to the server. Each directory must contain a
                         directory structure that complies with the server directory structure.
