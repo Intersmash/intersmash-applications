@@ -50,7 +50,8 @@ public class WildflyBuildStreamTest {
 				ApplicationProvider.wildflyKafkaSaslApplicationProvisionedServerPath(),
 				ApplicationProvider.wildflyElytronOidcClientKeycloakBootableJarProvisionedServerPath(),
 				ApplicationProvider.wildflyKeycloakSamlAdapterEjbBootableJarProvisionedServerPath(),
-				ApplicationProvider.wildflyTimerExpirationStoreProvisionedServerPath());
+				ApplicationProvider.wildflyTimerExpirationStoreProvisionedServerPath(),
+				ApplicationProvider.wildflyDistributedTimersInfinispanProvisionedServerPath());
 		provisionedServerPaths.forEach((path) -> {
 			final Path provisionedServerPath = Path
 					.of(path + "/.wildfly-maven-plugin-provisioning.xml");

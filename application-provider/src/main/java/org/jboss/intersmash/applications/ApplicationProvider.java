@@ -41,6 +41,7 @@ public class ApplicationProvider {
 	static final String WILDFLY_KAFKA_APPLICATION_DEPLOYMENT = "wildfly-kafka-application";
 	static final String WILDFLY_KAFKA_SASL_APPLICATION_DEPLOYMENT = "wildfly-kafka-sasl-application";
 	static final String WILDFLY_TIMER_EXPIRATION_STORE_DEPLOYMENT = "wildfly-timer-expiration-store";
+	static final String WILDFLY_DISTRIBUTED_TIMERS_INFINISPAN_DEPLOYMENT = "wildfly-distributed-timers-infinispan";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR = "war";
 	static final String WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_JAR = "jar";
 
@@ -138,6 +139,18 @@ public class ApplicationProvider {
 	 */
 	public static Path wildflyTimerExpirationStoreProvisionedServerPath() {
 		return findApplicationDirectory("wildfly", "timer-expiration-store", "target", "server");
+	}
+
+	/**
+	 * Provides access to a filesystem directory containing a server provisioned by
+	 * the WildFly/JBoss EAP 8.x Maven plugin, which is generated from the
+	 * {@code wildfly-distributed-timers-infinispan} application
+	 *
+	 * @return {@link Path} instance that identifies the directory containing the
+	 *         WildFly/JBoss EAP 8.x provisioned server.
+	 */
+	public static Path wildflyDistributedTimersInfinispanProvisionedServerPath() {
+		return findApplicationDirectory("wildfly", "distributed-timers-infinispan", "target", "server");
 	}
 
 	/**
@@ -411,6 +424,25 @@ public class ApplicationProvider {
 		try {
 			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
 					WILDFLY_TIMER_EXPIRATION_STORE_DEPLOYMENT,
+					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
+					.toPath();
+		} catch (SettingsBuildingException | ArtifactResolutionException e) {
+			throw new RuntimeException("Can not get artifact", e);
+		}
+		return file;
+	}
+
+	/** Provides access to a WAR deployment containing the
+	 * {@code wildfly-distributed-timers-infinispan} application
+	 *
+	 * @return {@link Path} instance that identifies the WAR artifact containing the
+	 *         {@code wildfly-distributed-timers-infinispan} application.
+	 */
+	public static Path wildflyDistributedTimersInfinispanDeploymentPath() {
+		Path file = null;
+		try {
+			file = ArtifactProvider.resolveArtifact(ApplicationConfigurationProperties.groupID(),
+					WILDFLY_DISTRIBUTED_TIMERS_INFINISPAN_DEPLOYMENT,
 					ApplicationConfigurationProperties.version(), WILDFLY_DEPLOYMENT_ARTIFACT_PACKAGING_WAR, null)
 					.toPath();
 		} catch (SettingsBuildingException | ArtifactResolutionException e) {
