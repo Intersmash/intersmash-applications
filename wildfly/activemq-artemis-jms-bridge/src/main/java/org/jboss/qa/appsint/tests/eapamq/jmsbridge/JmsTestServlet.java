@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.jms.JMSContext;
 import jakarta.jms.Queue;
 import jakarta.jms.TextMessage;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,7 +36,7 @@ public class JmsTestServlet extends HttpServlet {
 	private JMSContext context;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 		resp.setContentType("text/html");
 		TextMessage textMessage;
 
@@ -57,8 +58,9 @@ public class JmsTestServlet extends HttpServlet {
 				default:
 					out.println("Usage: use <b>?produce</b> parameter to sent a message to test queue");
 			}
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, e.getMessage());
+		} catch (Exception error) {
+			LOGGER.log(Level.SEVERE, "Error sending message to jmsBridgeSourceQueue!", error);
+			throw new ServletException("Error sending message to jmsBridgeSourceQueue!", error);
 		}
 	}
 }
