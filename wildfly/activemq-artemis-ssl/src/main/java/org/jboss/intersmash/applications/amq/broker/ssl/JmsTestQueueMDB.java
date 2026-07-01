@@ -43,7 +43,8 @@ import java.util.logging.Logger;
  * </p>
  */
 @MessageDriven(name = "testQueueMDB", activationConfig = {
-		@ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/" + JmsTestConstants.IN_QUEUE),
+		@ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:app/queue/"
+				+ JmsTestConstants.IN_QUEUE),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "jakarta.jms.Queue"),
 		@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")
 })
@@ -68,13 +69,13 @@ public class JmsTestQueueMDB implements MessageListener {
 	/**
 	 * JMS context used for creating messages and producers.
 	 */
-	@Inject()
+	@Inject
 	private JMSContext context;
 
 	/**
 	 * Output queue where reply messages are sent after processing incoming messages.
 	 */
-	@Resource(lookup = "java:/queue/" + JmsTestConstants.OUT_QUEUE)
+	@Resource(lookup = "java:app/queue/" + JmsTestConstants.OUT_QUEUE)
 	private Queue outQueue;
 
 	/**

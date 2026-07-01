@@ -2,7 +2,7 @@
 /subsystem=messaging-activemq/server=default/jms-queue=jmsBridgeSourceQueue:add(entries=[queue/jmsBridgeSourceQueue jms/queue/jmsBridgeSourceQueue java:jboss/exported/jms/queue/jmsBridgeSourceQueue])
 
 /subsystem=messaging-activemq/jms-bridge=my-jms-bridge:add( \
-    quality-of-service=AT_MOST_ONCE, \
+    quality-of-service=DUPLICATES_OK, \
     module=org.apache.activemq.artemis, \
     failure-retry-interval=500, \
     max-retries=-1, \
