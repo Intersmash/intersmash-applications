@@ -41,6 +41,11 @@ public class JmsTestServlet extends HttpServlet {
 		TextMessage textMessage;
 
 		String request = req.getParameter("request");
+		String test = req.getParameter("test");
+
+		LOGGER.log(Level.INFO, "\n\n==============================\n" +
+				"Received request: " + request + " test: " + test +
+				"\n==============================\n");
 
 		try (PrintWriter out = resp.getWriter()) {
 			switch (request) {
@@ -49,11 +54,18 @@ public class JmsTestServlet extends HttpServlet {
 					textMessage = context.createTextMessage(QUEUE_TEXT_MESSAGE);
 					context.createProducer().send(queue, textMessage);
 					out.println(QUEUE_SEND_RESPONSE + queue.toString());
+					LOGGER.log(Level.INFO, "\n\n==============================\n" +
+							QUEUE_SEND_RESPONSE + queue.toString() +
+							"\n==============================\n");
 					break;
 				case REQUEST_COUNT:
 					// counts messages in the queue
 					out.println(String.format(QUEUE_COUNT_TEMPLATE,
 							Collections.list(context.createBrowser(queue).getEnumeration()).size()));
+					LOGGER.log(Level.INFO, "\n\n==============================\n" +
+							String.format(QUEUE_COUNT_TEMPLATE,
+							Collections.list(context.createBrowser(queue).getEnumeration()).size()) +
+							"\n==============================\n");
 					break;
 				default:
 					out.println("Usage: use <b>?produce</b> parameter to sent a message to test queue");
