@@ -63,18 +63,18 @@ import java.util.logging.Logger;
  * added to the destinations names;
  * see <a href="https://issues.redhat.com/browse/WFLY-13793">WFLY-13793</a> for context;</p>
  */
+@WebServlet("/jms-test")
 @JMSDestinationDefinitions(value = {
-		@JMSDestinationDefinition(name = "java:/queue/"
+		@JMSDestinationDefinition(name = "java:app/queue/"
 				+ JmsTestConstants.TEST_QUEUE, interfaceName = "jakarta.jms.Queue", destinationName = JmsTestConstants.TEST_DESTINATION, properties = {
 						"enable-amq1-prefix=false" }),
-		@JMSDestinationDefinition(name = "java:/queue/"
+		@JMSDestinationDefinition(name = "java:app/queue/"
 				+ JmsTestConstants.IN_QUEUE, interfaceName = "jakarta.jms.Queue", destinationName = JmsTestConstants.IN_DESTINATION, properties = {
 						"enable-amq1-prefix=false" }),
-		@JMSDestinationDefinition(name = "java:/queue/"
+		@JMSDestinationDefinition(name = "java:app/queue/"
 				+ JmsTestConstants.OUT_QUEUE, interfaceName = "jakarta.jms.Queue", destinationName = JmsTestConstants.OUT_DESTINATION, properties = {
 						"enable-amq1-prefix=false" })
 })
-@WebServlet("/jms-test")
 public class JmsTestServlet extends HttpServlet {
 
 	/**
@@ -85,25 +85,25 @@ public class JmsTestServlet extends HttpServlet {
 	/**
 	 * General purpose test queue for direct message send/receive operations.
 	 */
-	@Resource(lookup = "java:/queue/" + JmsTestConstants.TEST_QUEUE)
+	@Resource(lookup = "java:app/queue/" + JmsTestConstants.TEST_QUEUE)
 	private Queue testQueue;
 
 	/**
 	 * Input queue consumed by the message-driven bean (MDB).
 	 */
-	@Resource(lookup = "java:/queue/" + JmsTestConstants.IN_QUEUE)
+	@Resource(lookup = "java:app/queue/" + JmsTestConstants.IN_QUEUE)
 	private Queue inQueue;
 
 	/**
 	 * Output queue where the MDB sends reply messages after processing.
 	 */
-	@Resource(lookup = "java:/queue/" + JmsTestConstants.OUT_QUEUE)
+	@Resource(lookup = "java:app/queue/" + JmsTestConstants.OUT_QUEUE)
 	private Queue outQueue;
 
 	/**
 	 * JMS context for simplified JMS API operations (send/receive messages).
 	 */
-	@Inject()
+	@Inject
 	private JMSContext jmsContext;
 
 	/**
@@ -139,7 +139,6 @@ public class JmsTestServlet extends HttpServlet {
 		TextMessage textMessage;
 
 		String request = req.getParameter("request");
-
 		try (PrintWriter out = resp.getWriter()) {
 
 			if (request == null || "".equals(request)) { // log usage and return

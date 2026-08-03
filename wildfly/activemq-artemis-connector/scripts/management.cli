@@ -1,1 +1,2 @@
 /interface=management:write-attribute(name=inet-address, value="${jboss.bind.address.management:0.0.0.0}")
+/subsystem=jgroups/stack=tcp/protocol=PING:add(add-index=1)
