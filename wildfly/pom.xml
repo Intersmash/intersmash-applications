@@ -37,7 +37,7 @@
         <!-- Default WildFly/JBoss EAP Cloud Feature Pack coordinates -->
         <wildfly.cloud-feature-pack.location>org.wildfly.cloud:wildfly-cloud-galleon-pack:9.2.2.Final</wildfly.cloud-feature-pack.location>
         <!-- Default WildFly/JBoss EAP Datasources Feature Pack coordinates -->
-        <wildfly.datasources-feature-pack.location>org.wildfly:wildfly-datasources-galleon-pack:11.3.0.Final</wildfly.datasources-feature-pack.location>
+        <wildfly.datasources-feature-pack.location>org.wildfly:wildfly-datasources-galleon-pack:11.5.0.Final</wildfly.datasources-feature-pack.location>
         <!-- Channel manifest coordinates (empty for WildFly) -->
         <wildfly.ee-channel.groupId>org.wildfly.channels</wildfly.ee-channel.groupId>
         <wildfly.ee-channel.artifactId>wildfly-ee</wildfly.ee-channel.artifactId>
@@ -51,8 +51,6 @@
         <keycloak-saml-adapter-galleon-pack.version>${keycloak.version}</keycloak-saml-adapter-galleon-pack.version>
         <!-- jslt library -->
         <org.glassfish.web.version>3.0.1</org.glassfish.web.version>
-        <!-- DataSources Feature Pack -->
-        <wildfly.datasources-feature-pack.location>org.wildfly:wildfly-datasources-galleon-pack:5.0.0.Final</wildfly.datasources-feature-pack.location>
         <!-- kafka -->
         <version.org.apache.kafka.kafka-clients>3.7.1</version.org.apache.kafka.kafka-clients>
         <version.microprofile-reactive-messaging-api>2.0.1</version.microprofile-reactive-messaging-api>
