@@ -30,6 +30,9 @@
         <bom.wildfly-microprofile.groupId>org.wildfly.bom</bom.wildfly-microprofile.groupId>
         <bom.wildfly-microprofile.artifactId>wildfly-expansion</bom.wildfly-microprofile.artifactId>
         <bom.wildfly-microprofile.version>${wildfly.version}</bom.wildfly-microprofile.version>
+
+        <!-- ricomincia da qui -->
+
         <!-- Default WildFly/JBoss EAP Feature Pack coordinates -->
         <wildfly.feature-pack.location>org.wildfly:wildfly-galleon-pack:${wildfly.version}</wildfly.feature-pack.location>
         <!-- Default WildFly/JBoss EAP Feature Pack coordinates -->
@@ -37,7 +40,7 @@
         <!-- Default WildFly/JBoss EAP Cloud Feature Pack coordinates -->
         <wildfly.cloud-feature-pack.location>org.wildfly.cloud:wildfly-cloud-galleon-pack:9.2.2.Final</wildfly.cloud-feature-pack.location>
         <!-- Default WildFly/JBoss EAP Datasources Feature Pack coordinates -->
-        <wildfly.datasources-feature-pack.location>org.wildfly:wildfly-datasources-galleon-pack:11.3.0.Final</wildfly.datasources-feature-pack.location>
+        <wildfly.datasources-feature-pack.location>org.wildfly:wildfly-datasources-galleon-pack:11.5.0.Final</wildfly.datasources-feature-pack.location>
         <!-- Channel manifest coordinates (empty for WildFly) -->
         <wildfly.ee-channel.groupId>org.wildfly.channels</wildfly.ee-channel.groupId>
         <wildfly.ee-channel.artifactId>wildfly-ee</wildfly.ee-channel.artifactId>
@@ -51,8 +54,6 @@
         <keycloak-saml-adapter-galleon-pack.version>${keycloak.version}</keycloak-saml-adapter-galleon-pack.version>
         <!-- jslt library -->
         <org.glassfish.web.version>3.0.1</org.glassfish.web.version>
-        <!-- DataSources Feature Pack -->
-        <wildfly.datasources-feature-pack.location>org.wildfly:wildfly-datasources-galleon-pack:5.0.0.Final</wildfly.datasources-feature-pack.location>
         <!-- kafka -->
         <version.org.apache.kafka.kafka-clients>3.7.1</version.org.apache.kafka.kafka-clients>
         <version.microprofile-reactive-messaging-api>2.0.1</version.microprofile-reactive-messaging-api>
@@ -244,8 +245,6 @@
                 <!-- Keycloak SAML -->
                 <keycloak.version>26.2.4.redhat-00013</keycloak.version>
                 <keycloak-saml-adapter-galleon-pack.version>26.4.8.redhat-00002</keycloak-saml-adapter-galleon-pack.version>
-                <!-- DataSources Feature Pack -->
-                <wildfly.datasources-feature-pack.location>org.jboss.eap:eap-datasources-galleon-pack:8.1.1.Final-redhat-00007</wildfly.datasources-feature-pack.location>
             </properties>
             <modules>
                 <module>elytron-oidc-client-keycloak</module>
@@ -335,8 +334,6 @@
                 <!-- Keycloak SAML -->
                 <keycloak.version>26.2.4.redhat-00013</keycloak.version>
                 <keycloak-saml-adapter-galleon-pack.version>26.4.4.redhat-00001</keycloak-saml-adapter-galleon-pack.version>
-                <!-- DataSources Feature Pack -->
-                <wildfly.datasources-feature-pack.location>org.jboss.eap:eap-datasources-galleon-pack:8.1.1.Final-redhat-00007</wildfly.datasources-feature-pack.location>
             </properties>
             <!--
                 The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
@@ -441,8 +438,6 @@
                 <!-- Keycloak SAML -->
                 <keycloak.version>26.2.4.redhat-00013</keycloak.version>
                 <keycloak-saml-adapter-galleon-pack.version>26.4.4.redhat-00001</keycloak-saml-adapter-galleon-pack.version>
-                <!-- DataSources Feature Pack -->
-                <wildfly.datasources-feature-pack.location>org.jboss.eap:eap-datasources-galleon-pack:8.1.1.Final-redhat-00007</wildfly.datasources-feature-pack.location>
             </properties>
             <!--
                 The JBoss EAP XP profile will build all the applications modules, as it supports MicroProfile too.
